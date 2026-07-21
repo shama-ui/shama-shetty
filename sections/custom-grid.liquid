@@ -1,0 +1,46 @@
+<section class="custom-grid">
+    <h2>{{ section.settings.title }}</h2>
+    <div class="grid">
+        {% for block in section.blocks %}
+        <div class="card">
+            <img
+                src="{{  block.settings.image | image_url }}"
+                width="300"
+                height=""
+            >
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+{
+    "name":"Custom Grid",
+    "settings": [
+        {
+            "type": "text",
+            "id":"title",
+            "label":"Tisso vison in the wild"
+        }
+    ],
+    "blocks": [
+        {
+            "type":"card",
+            "name":"Card",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id":"image",
+                    "label": "Image"
+                }
+            ]
+        }
+        
+    ],
+    "presets": [
+        {
+            "name": "Custom Grid"
+        }
+    ]
+}
+{% endschema %}
