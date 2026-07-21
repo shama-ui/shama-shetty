@@ -12,17 +12,14 @@
     </a>
   </div>
 
-
-  <!-- Second Row: Full Width Image -->
   <div class="gift-banner__full-image">
-    {% if section.settings.full_image != blank %}
-      {{ section.settings.full_image 
-        | image_url: width: 2000 
-        | image_tag:
-            loading: 'lazy',
-            alt: section.settings.heading
-        }}
-    {% endif %}
+  <img
+    src="{{ 'banner-image1.svg' | asset_url }}"
+    alt="{{ section.settings.heading }}"
+    loading="lazy"
+    width="2000"
+    height="auto"
+  >
   </div>
 
 
