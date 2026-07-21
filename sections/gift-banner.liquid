@@ -16,11 +16,12 @@
   <!-- Second Row: Full Width Image -->
   <div class="gift-banner__full-image">
     {% if section.settings.full_image != blank %}
-      <img 
-        src="{{ section.settings.full_image | image_url: width: 2000 }}"
-        alt="{{ section.settings.heading }}"
-        loading="lazy"
-      >
+      {{ section.settings.full_image 
+        | image_url: width: 2000 
+        | image_tag:
+            loading: 'lazy',
+            alt: section.settings.heading
+        }}
     {% endif %}
   </div>
 
@@ -45,11 +46,12 @@
     <div class="gift-banner__image">
 
       {% if section.settings.second_image != blank %}
-        <img
-          src="{{ section.settings.second_image | image_url: width: 1200 }}"
-          alt="{{ section.settings.second_heading }}"
-          loading="lazy"
-        >
+        {{ section.settings.second_image 
+        | image_url: width: 1200 
+        | image_tag:
+            loading: 'lazy',
+            alt: section.settings.second_heading
+        }}
       {% endif %}
 
     </div>
