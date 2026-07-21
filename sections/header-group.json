@@ -95,12 +95,12 @@
         "text_color_transparent_collection": ""
       }
     },
-    "gift_banner_XU66C9": {
+    "gift_banner_y9MGWk": {
       "type": "gift-banner",
       "name": "Gift Banner",
       "settings": {
-        "heading": "The Gift Guide",
-        "description": "",
+        "heading": "Tisso Vison",
+        "description": "Find the ideal gift for your loved ones",
         "button_text": "SHOP NOW",
         "button_link": "",
         "second_heading": "",
@@ -121,7 +121,7 @@
   },
   "order": [
     "header_section",
-    "gift_banner_XU66C9",
+    "gift_banner_y9MGWk",
     "custom_grid_ifDpzW"
   ]
 }
