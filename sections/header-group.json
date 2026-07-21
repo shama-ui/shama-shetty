@@ -49,6 +49,7 @@
           "blocks": {}
         }
       },
+      "disabled": true,
       "settings": {
         "logo_position": "left",
         "menu_position": "left",
@@ -94,6 +95,21 @@
         "text_color_transparent_collection": ""
       }
     },
+    "gift_banner_XU66C9": {
+      "type": "gift-banner",
+      "name": "Gift Banner",
+      "settings": {
+        "heading": "The Gift Guide",
+        "description": "",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "second_heading": "",
+        "second_description": "",
+        "second_button_text": "SHOP NOW",
+        "second_button_link": "",
+        "footer_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+      }
+    },
     "custom_grid_ifDpzW": {
       "type": "custom-grid",
       "name": "Custom Image Grid",
@@ -105,6 +121,7 @@
   },
   "order": [
     "header_section",
+    "gift_banner_XU66C9",
     "custom_grid_ifDpzW"
   ]
 }
