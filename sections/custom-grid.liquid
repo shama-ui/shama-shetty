@@ -22,9 +22,11 @@
             {% if product.featured_image %}
               <img
                 src="{{ product.featured_image | image_url: width: 600 }}"
-                alt="{{ product.title }}"
+                alt="{{ product.title | escape }}"
+                width="{{ product.featured_image.width }}"
+                height="{{ product.featured_image.height }}"
                 loading="lazy"
-              >
+                >
             {% endif %}
 
           </div>
