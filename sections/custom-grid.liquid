@@ -1,113 +1,162 @@
-<section class="custom-grid page-width">
+<section class="custom-grid-section">
 
-  {% if section.settings.title != blank %}
-    <h2 class="custom-grid__title">
-      {{ section.settings.title }}
-    </h2>
-  {% endif %}
+  <div class="custom-grid-container">
 
-  <div class="custom-grid__wrapper">
+    <!-- Title -->
+    <div class="custom-grid-title">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
 
-    {% assign collection = section.settings.collection %}
 
-    {% if collection != blank %}
+    <!-- Images Grid -->
+    <div class="custom-grid-images">
 
-      {% for product in collection.products %}
+      {% assign selected_collection = section.settings.collection %}
 
-        <div class="custom-grid__item">
+      {% if selected_collection != blank %}
 
-          {% if product.featured_image %}
-            <img
-              src="{{ product.featured_image | image_url: width: 800 }}"
-              alt="{{ product.title | escape }}"
-              loading="lazy"
-              width="400"
-              height="400"
-            >
-          {% endif %}
+        {% for product in selected_collection.products %}
 
-        </div>
+          <div class="custom-grid-item">
 
-      {% endfor %}
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.title }}"
+                loading="lazy"
+              >
+            {% endif %}
 
-    {% else %}
+          </div>
 
-      <p>Please select a collection from the Theme Customizer.</p>
+        {% endfor %}
 
-    {% endif %}
+      {% endif %}
+
+    </div>
 
   </div>
 
 </section>
 
+
 <style>
 
-.custom-grid{
-  padding:60px 0;
+.custom-grid-section {
+  padding: 60px 40px;
 }
 
-.custom-grid__title{
-  text-align:center;
-  font-size:36px;
-  font-weight:700;
-  margin-bottom:40px;
+
+.custom-grid-container {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
 }
 
-.custom-grid__wrapper{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+
+/* Left Title */
+
+.custom-grid-title {
+  width: 25%;
 }
 
-.custom-grid__item img{
-  width:100%;
-  height:350px;
-  object-fit:cover;
-  display:block;
-  border-radius:10px;
+
+.custom-grid-title h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0;
 }
 
-@media(max-width:990px){
 
-.custom-grid__wrapper{
-grid-template-columns:repeat(2,1fr);
+/* Image Grid */
+
+.custom-grid-images {
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
 }
 
+
+.custom-grid-item {
+  overflow: hidden;
 }
 
-@media(max-width:749px){
 
-.custom-grid__wrapper{
-grid-template-columns:1fr;
+.custom-grid-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  transition: transform .3s ease;
 }
 
-.custom-grid__title{
-font-size:28px;
+
+.custom-grid-item img:hover {
+  transform: scale(1.05);
+}
+
+
+/* Tablet */
+
+@media(max-width:900px){
+
+  .custom-grid-container{
+    flex-direction:column;
+  }
+
+
+  .custom-grid-title,
+  .custom-grid-images{
+    width:100%;
+  }
+
+
+}
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+.custom-grid-images{
+ grid-template-columns:repeat(2,1fr);
+}
+
+
+.custom-grid-title h2{
+ font-size:30px;
 }
 
 }
 
 </style>
 
+
 {% schema %}
 {
-  "name": "Custom Grid",
+  "name": "Custom Image Grid",
+
   "settings": [
+
     {
       "type": "text",
-      "id": "title",
-      "label": "Section Title",
+      "id": "heading",
+      "label": "Heading",
       "default": "Our Collection"
     },
+
     {
       "type": "collection",
       "id": "collection",
       "label": "Select Collection"
     }
+
   ],
+
   "presets": [
     {
-      "name": "Custom Grid"
+      "name": "Custom Image Grid"
     }
   ]
 }
