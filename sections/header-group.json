@@ -126,11 +126,11 @@
         "text_color_transparent_collection": ""
       }
     },
-    "custom_grid_Pwr6G6": {
+    "custom_grid_zg98BD": {
       "type": "custom-grid",
       "name": "Custom Image Grid",
       "settings": {
-        "heading": "Our Collection",
+        "heading": "Tisso vison in the wild",
         "collection": "products"
       }
     }
@@ -138,6 +138,6 @@
   "order": [
     "header_announcements_9jGBFp",
     "header_section",
-    "custom_grid_Pwr6G6"
+    "custom_grid_zg98BD"
   ]
 }
