@@ -39,17 +39,15 @@
 
     </div>
 
-
     <div class="gift-banner__image">
 
-      {% if section.settings.second_image != blank %}
-        {{ section.settings.second_image 
-        | image_url: width: 1200 
-        | image_tag:
-            loading: 'lazy',
-            alt: section.settings.second_heading
-        }}
-      {% endif %}
+    <img
+        src="{{ 'banner-image2.svg' | asset_url }}"
+        alt="{{ section.settings.second_heading }}"
+        loading="lazy"
+        width="1200"
+        height="800"
+    >
 
     </div>
 
