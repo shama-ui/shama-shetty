@@ -320,6 +320,85 @@
     margin-bottom:8px;
 }
 
+.size-option-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.custom-size-dropdown {
+    position: relative;
+    width: 180px;
+    font-size: 13px;
+}
+
+.size-dropdown-selected {
+    height: 32px;
+    border: 1px solid #999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    cursor: pointer;
+    background: #fff;
+}
+
+
+.size-arrow {
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
+    transform: rotate(45deg);
+    transition: .3s ease;
+    margin-top: -5px;
+}
+
+
+/* rotate arrow when open */
+.custom-size-dropdown.active .size-arrow {
+    transform: rotate(225deg);
+    margin-top: 5px;
+}
+
+
+.size-dropdown-options {
+    position: absolute;
+    top: 33px;
+    left: 0;
+    width: 100%;
+    border: 1px solid #999;
+    background: white;
+    display: none;
+    z-index: 10;
+}
+
+
+.custom-size-dropdown.active .size-dropdown-options {
+    display: block;
+}
+
+
+.size-option {
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+
+.size-option:hover {
+    background: #f5f5f5;
+}
+
+
+/* selected value */
+.size-option.selected {
+    background: #000;
+    color: #fff;
+}
+
 .size-option-title{
     font-family:"Jost",sans-serif;
     font-size:14px;
