@@ -49,7 +49,7 @@
 
                                 {% if option.name == 'Color' %}
 
-                                    <div class="option-title">
+                                    <div class="color-option-title">
                                     Color
                                     </div>
 
@@ -72,7 +72,7 @@
 
                                 {% elsif option.name == 'Size' %}
 
-                                    <div class="option-title">
+                                    <div class="size-option-title">
                                     Size
                                     </div>
 
@@ -308,11 +308,18 @@
 }
 
 
-.option-title{
+.color-option-title{
     font-family:"Jost",sans-serif;
     font-size:14px;
     font-weight: 400;
     margin-bottom:8px;
+}
+
+.size-option-title{
+    font-family:"Jost",sans-serif;
+    font-size:14px;
+    font-weight: 400;
+    margin:10px 0 8px 0;
 }
 
 
