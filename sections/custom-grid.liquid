@@ -75,36 +75,25 @@
                                 {% for option in product.options_with_values %}
                                     {% if option.name == 'Size' %}
 
-                                        <div class="size-option-wrapper">
-
                                         <div class="size-option-title">
                                             Size
                                         </div>
 
-                                        <div class="custom-select">
+                                        <select class="size-select">
 
-                                            <select class="size-select">
-                                            <option value="">
+                                            <option>
                                                 Choose your size
                                             </option>
 
                                             {% for value in option.values %}
+
                                                 <option value="{{ value }}">
-                                                {{ value }}
+                                                    {{ value }}
                                                 </option>
+
                                             {% endfor %}
 
-                                            </select>
-
-                                            <span class="select-arrow">
-                                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"/>
-                                            </svg>
-                                            </span>
-
-                                        </div>
-
-                                        </div>
+                                        </select>
 
                                     {% endif %}
                                 {% endfor %}
@@ -328,111 +317,11 @@
     margin-bottom:8px;
 }
 
-.size-option-wrapper {
-    width: 100%;
-}
-
-.size-option-title {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #111;
-}
-
-
-.custom-select {
-    position: relative;
-    width: 100%;
-}
-
-
-.size-select {
-    width: 100%;
-    height: 48px;
-    padding: 0 45px 0 16px;
-
-    border: 1px solid #d9d9d9;
-    border-radius: 4px;
-
-    background: #fff;
-    color: #111;
-
-    font-size: 14px;
-    cursor: pointer;
-
-    appearance: none;
-    -webkit-appearance: none;
-
-    outline: none;
-
-    transition: all 0.3s ease;
-}
-
-
-/* Hover */
-
-.size-select:hover {
-    border-color: #000;
-}
-
-
-/* Focus / Open */
-
-.size-select:focus {
-    border-color: #000;
-    box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
-}
-
-
-/* Arrow */
-
-.select-arrow {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-
-    transform: translateY(-50%) rotate(0deg);
-
-    pointer-events: none;
-
-    display: flex;
-    align-items: center;
-
-    transition: transform .3s ease;
-}
-
-
-/* Rotate arrow when dropdown active */
-
-.custom-select:focus-within .select-arrow {
-    transform: translateY(-50%) rotate(180deg);
-}
-
-
-
-/* Dropdown options */
-
-.size-select option {
-    background: #fff;
-    color: #111;
-    padding: 12px;
-    font-size: 14px;
-}
-
-
-/* Selected option */
-
-.size-select option:checked {
-    background: #000;
-    color: #fff;
-}
-
-
-/* Option hover (works in supported browsers) */
-
-.size-select option:hover {
-    background: #000;
-    color: #fff;
+.size-option-title{
+    font-family:"Jost",sans-serif;
+    font-size:14px;
+    font-weight: 400;
+    margin:10px 0 8px 0;
 }
 
 
@@ -579,19 +468,7 @@ document.addEventListener("click", function(event){
     }
 });
 
-document.querySelectorAll('.size-select').forEach(select => {
 
-    select.addEventListener('change', function(){
-
-        if(this.value !== ""){
-            this.style.borderColor = "#000";
-        } else {
-            this.style.borderColor = "#d9d9d9";
-        }
-
-    });
-
-});
 
 </script>
 
