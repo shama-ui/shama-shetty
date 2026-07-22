@@ -1,409 +1,140 @@
-<section class="collection-grid-popup">
+<section class="tissot-section">
 
-  {% assign collection = section.settings.collection %}
+  <div class="tissot-container">
 
-  {% if collection != blank %}
+    <!-- Header -->
+    <div class="tissot-header">
+      <h1>{{ section.settings.heading }}</h1>
+    </div>
 
-    <div class="page-width">
 
-      {% if section.settings.heading != blank %}
-        <h2 class="grid-heading">
-          {{ section.settings.heading }}
-        </h2>
-      {% endif %}
+    <!-- Image Grid -->
+    <div class="tissot-grid">
 
-      <div class="collection-grid">
+      {% for block in section.blocks %}
 
-        {% for product in collection.products %}
+        <div class="tissot-item">
 
-          <div class="grid-item">
+          {% if block.settings.image != blank %}
 
-            <div class="product-image">
+            <img
+              src="{{ block.settings.image | image_url: width: 800 }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              loading="lazy"
+              alt="{{ block.settings.product.title }}"
+            >
 
-              {{
-                product.featured_image
-                | image_url: width: 800
-                | image_tag:
-                  loading: 'lazy',
-                  width: product.featured_image.width,
-                  height: product.featured_image.height,
-                  alt: product.title
-              }}
+          {% endif %}
 
-              <button
-                class="popup-btn"
-                data-title="{{ product.title }}"
-                data-price="{{ product.price | money }}"
-                data-image="{{ product.featured_image | image_url: width: 700 }}"
-                data-url="{{ product.url }}"
-                data-variant="{{ product.selected_or_first_available_variant.id }}"
-              >
-                +
-              </button>
 
-            </div>
+          <!-- Plus Button -->
 
-          </div>
+          {% assign product = block.settings.product %}
 
-        {% endfor %}
+          {% if product != blank %}
 
-      </div>
+          <button 
+            class="product-hotspot"
+            data-title="{{ product.title }}"
+            data-image="{{ product.featured_image | image_url: width:500 }}"
+            data-price="{{ product.price | money }}"
+            data-description="{{ product.description | strip_html }}"
+          >
+            +
+          </button>
+
+          {% endif %}
+
+
+        </div>
+
+
+      {% endfor %}
 
     </div>
 
-  {% endif %}
+
+  </div>
 
 </section>
 
-<div class="product-popup">
 
-    <div class="popup-overlay"></div>
 
-    <div class="popup-box">
+<!-- Product Popup -->
 
-        <button class="popup-close">&times;</button>
+<div class="product-modal">
 
-        <div class="popup-image">
-            <img id="popupImage" src="" alt="">
-        </div>
+  <div class="modal-content">
 
-        <div class="popup-info">
+    <button class="modal-close">
+      ×
+    </button>
 
-            <h3 id="popupTitle"></h3>
 
-            <div id="popupPrice"></div>
+    <img class="modal-image">
 
-            <form method="post" action="/cart/add">
 
-                <input
-                    id="popupVariant"
-                    type="hidden"
-                    name="id"
-                    value=""
-                >
+    <div class="modal-details">
 
-                <button class="add-cart-btn" type="submit">
-                    Add To Cart
-                </button>
+      <h2 class="modal-title"></h2>
 
-            </form>
+      <p class="modal-price"></p>
 
-            <a id="popupLink" class="view-product" href="">
-                View Product
-            </a>
+      <p class="modal-description"></p>
 
-        </div>
+      <a href="#" class="modal-button">
+        View Product
+      </a>
 
     </div>
 
+
+  </div>
+
 </div>
 
-<style>
 
-.collection-grid-popup{
-    padding:70px 0;
-}
 
-.grid-heading{
-    margin-bottom:40px;
-    font-size:48px;
-    font-weight:500;
-}
+<script src="{{ 'tissot-popup.js' | asset_url }}" defer></script>
 
-.collection-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:30px;
-}
 
-.grid-item{
-    position:relative;
-}
-
-.product-image{
-    position:relative;
-    overflow:hidden;
-}
-
-.product-image img{
-    width:100%;
-    height:600px;
-    object-fit:cover;
-    display:block;
-}
-
-.popup-btn{
-
-    position:absolute;
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:52px;
-    height:52px;
-
-    border-radius:50%;
-    border:none;
-
-    background:#fff;
-    color:#000;
-
-    font-size:34px;
-    line-height:1;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    z-index:5;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
-
-}
-
-.popup-btn:hover{
-
-    transform:translate(-50%,-50%) scale(1.1);
-
-}
-
-.product-popup{
-
-    position:fixed;
-    inset:0;
-
-    display:none;
-
-    justify-content:center;
-    align-items:center;
-
-    z-index:9999;
-
-}
-
-.product-popup.active{
-
-    display:flex;
-
-}
-
-.popup-overlay{
-
-    position:absolute;
-    inset:0;
-
-    background:rgba(0,0,0,.6);
-
-}
-
-.popup-box{
-
-    position:relative;
-
-    background:#fff;
-
-    width:900px;
-
-    max-width:95%;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    z-index:5;
-
-    border-radius:10px;
-
-    overflow:hidden;
-
-}
-
-.popup-image img{
-
-    width:100%;
-    display:block;
-
-}
-
-.popup-info{
-
-    padding:40px;
-
-}
-
-.popup-info h3{
-
-    font-size:30px;
-    margin-bottom:20px;
-
-}
-
-.popup-info div{
-
-    font-size:22px;
-    margin-bottom:30px;
-
-}
-
-.add-cart-btn{
-
-    width:100%;
-    height:52px;
-
-    border:none;
-
-    background:#000;
-    color:#fff;
-
-    cursor:pointer;
-
-    margin-bottom:15px;
-
-}
-
-.view-product{
-
-    display:block;
-
-    text-align:center;
-
-    text-decoration:none;
-
-    color:#000;
-
-}
-
-.popup-close{
-
-    position:absolute;
-
-    top:10px;
-    right:15px;
-
-    background:none;
-
-    border:none;
-
-    font-size:35px;
-
-    cursor:pointer;
-
-    z-index:10;
-
-}
-
-@media(max-width:991px){
-
-.collection-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.popup-box{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-@media(max-width:767px){
-
-.collection-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.product-image img{
-
-height:450px;
-
-}
-
-.grid-heading{
-
-font-size:32px;
-
-}
-
-}
-
-</style>
-
-<script>
-
-document.addEventListener("DOMContentLoaded",function(){
-
-const popup=document.querySelector(".product-popup");
-
-const popupImage=document.getElementById("popupImage");
-
-const popupTitle=document.getElementById("popupTitle");
-
-const popupPrice=document.getElementById("popupPrice");
-
-const popupVariant=document.getElementById("popupVariant");
-
-const popupLink=document.getElementById("popupLink");
-
-document.querySelectorAll(".popup-btn").forEach(function(button){
-
-button.addEventListener("click",function(){
-
-popup.classList.add("active");
-
-popupImage.src=this.dataset.image;
-
-popupTitle.textContent=this.dataset.title;
-
-popupPrice.textContent=this.dataset.price;
-
-popupVariant.value=this.dataset.variant;
-
-popupLink.href=this.dataset.url;
-
-});
-
-});
-
-document.querySelector(".popup-overlay").addEventListener("click",function(){
-
-popup.classList.remove("active");
-
-});
-
-document.querySelector(".popup-close").addEventListener("click",function(){
-
-popup.classList.remove("active");
-
-});
-
-});
-
-</script>
 
 {% schema %}
 {
-  "name": "Collection Grid Popup",
+  "name": "Tissot Vision Wild",
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Tisso vision in the wild"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
+      "default": "Tissot vision in the wild"
     }
   ],
+
+  "blocks": [
+    {
+      "type": "product_image",
+      "name": "Product Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+
+
   "presets": [
     {
-      "name": "Collection Grid Popup"
+      "name": "Tissot Vision Wild"
     }
   ]
 }
