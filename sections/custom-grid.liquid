@@ -27,16 +27,15 @@
                                 width="500"
                                 height="500"
                                 alt="{{  product.title }}">
-                                <div> 
+                                <div class="product-description"> 
+                                    <h3>{{ product.title }}</h3>
+                                    <div class="price">
+                                    {{ product.price | money }}
+                                    </div>
 
-                                </div>
-                                <h3>{{ product.title }}</h3>
-                                <div class="price">
-                                {{ product.price | money }}
-                                </div>
-
-                                <div>
-                                {{ product.description | strip_html | truncate:150 }}
+                                    <div>
+                                    {{ product.description | strip_html | truncate:150 }}
+                                    </div>
                                 </div>
                             </div>
 
