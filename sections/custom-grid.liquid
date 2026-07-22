@@ -60,7 +60,7 @@
                                         <button 
                                         class="color-item"
                                         data-color="{{ value }}"
-                                        style="border-left-color: {{ value | downcase }};"
+                                        style="--color: {{ value | downcase }};"
                                         >
                                         {{ value }}
                                         </button>
@@ -329,16 +329,26 @@
 }
 
 
-.color-item{
-    flex:1;
-    height:40px;
-    background:#fff;
-    border:none;
-    border-left:4px solid transparent;
-    border-right:1px solid #222;
-    font-family:"Jost",sans-serif;
-    font-size:16px;
-    cursor:pointer;
+.color-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.color-item::before {
+  content: "";
+  width: 3px;
+  height: 100%;
+  background-color: var(--color);
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 
