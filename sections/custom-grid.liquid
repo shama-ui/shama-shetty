@@ -45,57 +45,62 @@
 
                             <div class="product-options">
 
+                                
+                                <!-- COLOR FIRST -->
                                 {% for option in product.options_with_values %}
+                                    {% if option.name == 'Color' %}
 
-                                {% if option.name == 'Color' %}
+                                        <div class="color-option-title">
+                                            Color
+                                        </div>
 
-                                    <div class="color-option-title">
-                                    Color
-                                    </div>
+                                        <div class="color-options">
 
-                                    <div class="color-options">
+                                            {% for value in option.values %}
 
-                                    {% for value in option.values %}
+                                                <button 
+                                                    class="color-item"
+                                                    data-color="{{ value }}"
+                                                    style="--color: {{ value | downcase }};"
+                                                >
+                                                    {{ value }}
+                                                </button>
 
-                                        <button 
-                                        class="color-item"
-                                        data-color="{{ value }}"
-                                        style="--color: {{ value | downcase }};"
-                                        >
-                                        {{ value }}
-                                        </button>
+                                            {% endfor %}
 
-                                    {% endfor %}
+                                        </div>
 
-                                    </div>
-
-
-                                {% elsif option.name == 'Size' %}
-
-                                    <div class="size-option-title">
-                                    Size
-                                    </div>
-
-                                    <select class="size-select">
-
-                                    <option>
-                                        Choose your size
-                                    </option>
-
-                                    {% for value in option.values %}
-
-                                        <option value="{{ value }}">
-                                        {{ value }}
-                                        </option>
-
-                                    {% endfor %}
-
-                                    </select>
-
-
-                                {% endif %}
-
+                                    {% endif %}
                                 {% endfor %}
+
+
+                                <!-- SIZE SECOND -->
+                                {% for option in product.options_with_values %}
+                                    {% if option.name == 'Size' %}
+
+                                        <div class="size-option-title">
+                                            Size
+                                        </div>
+
+                                        <select class="size-select">
+
+                                            <option>
+                                                Choose your size
+                                            </option>
+
+                                            {% for value in option.values %}
+
+                                                <option value="{{ value }}">
+                                                    {{ value }}
+                                                </option>
+
+                                            {% endfor %}
+
+                                        </select>
+
+                                    {% endif %}
+                                {% endfor %}
+
 
                             </div>
 
