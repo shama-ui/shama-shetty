@@ -23,10 +23,12 @@
                         </div>
                         <div id="product-{{ product.id }}" class="tisso-product-data" hidden>
                             <div class="product-info">
-                                <img src="{{ product.featured_image | image_url: width:500 }}" 
-                                width="500"
-                                height="500"
-                                alt="{{  product.title }}">
+                                <div class="product-img-wrapper">
+                                    <img src="{{ product.featured_image | image_url: width:500 }}" 
+                                    width="500"
+                                    height="500"
+                                    alt="{{  product.title }}">
+                                </div>
                                 <div class="product-description"> 
                                     <h3>{{ product.title }}</h3>
                                     <div class="price">
@@ -212,6 +214,11 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:25px;
+}
+
+.product-img-wrapper{
+    width:120px;
+    height:140px;
 }
 
 .tisso-popup-content img{
