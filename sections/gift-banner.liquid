@@ -102,31 +102,40 @@
 
 
 .gift-banner__button{
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  background: transparent;
-  border: 2px solid #f4c542;
-  color: #000;
-  text-decoration: none;
-  font-weight: 600;
-  overflow: hidden;
-  z-index: 1;
-  transition: color 0.3s ease;
+  border 2px solid currentColor
+  border-radius 3rem
+  color yellow
+  font-family roboto
+  font-size 4rem
+  font-weight 100
+  overflow hidden
+  padding 1rem 2rem
+  position relative
+  text-decoration none
+  transition .2s transform ease-in-out
+  will-change transform
+  z-index 0
 }
 
-.gift-banner__button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: #f4c542; /* Yellow */
-  transition: width 0.4s ease;
-  z-index: -1;
+.gift-banner__button::after {
+  background-color: yellow
+    border-radius: 3rem
+    content: ''
+    display: block
+    height: 100%
+    width: 100%
+    position: absolute
+    left: 0
+    top: 0
+    transform: translate(-100%, 0) rotate(10deg)
+    transform-origin: top left
+    transition: .2s transform ease-out
+    will-change transform
+    z-index: -1
+}
+
+.gift-banner__button:hover::after{
+    transform: translate(0, 0)
 }
 
 
