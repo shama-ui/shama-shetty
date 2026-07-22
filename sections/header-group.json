@@ -109,10 +109,19 @@
         "second_button_link": "",
         "footer_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
       }
+    },
+    "custom_grid_yq7dUT": {
+      "type": "custom-grid",
+      "name": "Tisso Grid",
+      "settings": {
+        "heading": "Tisso vison in the wild",
+        "collection": "products"
+      }
     }
   },
   "order": [
     "header_section",
-    "gift_banner_LP847M"
+    "gift_banner_LP847M",
+    "custom_grid_yq7dUT"
   ]
 }
