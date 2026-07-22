@@ -323,61 +323,99 @@
 .size-option-title{
     font-family:"Jost",sans-serif;
     font-size:14px;
-    font-weight: 400;
-    margin:10px 0 8px 0;
+    margin:20px 0 10px;
 }
 
 
-/* Select box */
-.size-select{
+.custom-size-dropdown{
+    position:relative;
+    width:100%;
+}
+
+
+.size-dropdown-btn{
     width:100%;
     height:48px;
-    padding:0 45px 0 15px;
-    border:1px solid #222;
     background:#fff;
-    color:#222;
-    font-family:"Jost", sans-serif;
+    border:1px solid #222;
+    padding:0 15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:"Jost",sans-serif;
     font-size:16px;
-    font-weight:400;
     cursor:pointer;
+}
 
-    appearance:none;
-    -webkit-appearance:none;
-    -moz-appearance:none;
 
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23000' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;
-    background-position:right 15px center;
-    background-size:12px;
+.size-dropdown-btn span{
+    font-size:20px;
+}
+
+
+/* Dropdown list */
+
+.size-dropdown-list{
+
+    position:absolute;
+    top:52px;
+    left:0;
+    width:100%;
+    background:#fff;
+    border:1px solid #222;
+    z-index:20;
+
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-10px);
+
+    transition:.3s ease;
+}
+
+
+.custom-size-dropdown.active 
+.size-dropdown-list{
+
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+
+}
+
+
+.size-option{
+
+    padding:12px 15px;
+    font-family:"Jost",sans-serif;
+    font-size:16px;
+    cursor:pointer;
+    border-bottom:1px solid #ddd;
+
+}
+
+
+.size-option:last-child{
+    border-bottom:none;
 }
 
 
 /* Hover */
-.size-select:hover{
-    border-color:#000;
+
+.size-option:hover{
+
+    background:#000;
+    color:#fff;
+
 }
 
 
-/* When selected */
-.size-select:focus{
-    outline:none;
-    border:1px solid #000;
-}
+/* Selected */
 
+.size-option.selected{
 
-/* Dropdown options */
-.size-select option{
-    background:#fff;
-    color:#000;
-    font-family:"Jost", sans-serif;
-    font-size:16px;
-    padding:10px;
-}
+    background:#000;
+    color:#fff;
 
-
-/* Disabled placeholder */
-.size-select option:first-child{
-    color:#777;
 }
 
 .color-options{
