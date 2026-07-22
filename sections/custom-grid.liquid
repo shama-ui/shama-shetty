@@ -75,25 +75,28 @@
                                 {% for option in product.options_with_values %}
                                     {% if option.name == 'Size' %}
 
-                                        <div class="size-option-title">
-                                            Size
-                                        </div>
+                                    <div class="size-option-title">
+                                        Size
+                                    </div>
 
-                                        <select class="size-select">
+                                    <div class="custom-size-dropdown">
 
-                                            <option>
-                                                Choose your size
-                                            </option>
+                                        <button class="size-dropdown-btn" type="button">
+                                            Choose your size
+                                            <span>⌄</span>
+                                        </button>
+
+                                        <div class="size-dropdown-list">
 
                                             {% for value in option.values %}
-
-                                                <option value="{{ value }}">
+                                                <div class="size-option" data-value="{{ value }}">
                                                     {{ value }}
-                                                </option>
-
+                                                </div>
                                             {% endfor %}
 
-                                        </select>
+                                        </div>
+
+                                    </div>
 
                                     {% endif %}
                                 {% endfor %}
