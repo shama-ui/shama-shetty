@@ -507,97 +507,110 @@
 </style>
 
 <script>
-
 document.addEventListener("click", function(event){
 
-  const button = event.target.closest(".tisso-plus");
+    // Open product popup
+    const button = event.target.closest(".tisso-plus");
 
-  if(button){
-    const productId = button.getAttribute("data-product-id");
-    const productData = document.getElementById(productId);
+    if(button){
 
-    if(productData){
-      document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
+        const productId = button.getAttribute("data-product-id");
+        const productData = document.getElementById(productId);
 
-      document.querySelector(".tisso-modal").classList.add("active");
-    } else {
-      console.log("Product data not found:", productId);
+        if(productData){
+
+            document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
+
+            document.querySelector(".tisso-modal").classList.add("active");
+
+        }
+
     }
-  }
 
-  if(
-    event.target.classList.contains("tisso-close") 
-  ){
 
-    document.querySelector(".tisso-modal").classList.remove("active");
+    // Close popup
+    if(event.target.closest(".tisso-close")){
 
-    document.querySelector(".tisso-popup-content").innerHTML = "";
-  }
+        document.querySelector(".tisso-modal").classList.remove("active");
+        document.querySelector(".tisso-popup-content").innerHTML = "";
 
-  const color = event.target.closest(".color-item");
+    }
 
+
+
+    // Color selection
+    const color = event.target.closest(".color-item");
 
     if(color){
 
-        document.querySelectorAll(".color-item")
+        color.parentElement.querySelectorAll(".color-item")
         .forEach(item=>{
             item.classList.remove("active");
         });
 
-
         color.classList.add("active");
 
     }
-});
-
-document.addEventListener("DOMContentLoaded", function(){
-
-    document.querySelectorAll(".custom-size-dropdown").forEach(function(dropdown){
-
-        let selected = dropdown.querySelector(".size-dropdown-selected");
-        let options = dropdown.querySelectorAll(".size-option");
-        let selectedText = selected.querySelector("span:first-child");
 
 
-        selected.addEventListener("click", function(){
 
-            dropdown.classList.toggle("active");
+    // SIZE DROPDOWN OPEN
+    const dropdownSelected = event.target.closest(".size-dropdown-selected");
 
+    if(dropdownSelected){
+
+        const dropdown = dropdownSelected.closest(".custom-size-dropdown");
+
+        dropdown.classList.toggle("active");
+
+    }
+
+
+
+    // SIZE OPTION SELECT
+    const sizeOption = event.target.closest(".size-option");
+
+    if(sizeOption){
+
+        const dropdown = sizeOption.closest(".custom-size-dropdown");
+
+        const selectedText = dropdown.querySelector(
+            ".size-dropdown-selected span:first-child"
+        );
+
+
+        selectedText.textContent = sizeOption.textContent;
+
+
+        dropdown.querySelectorAll(".size-option")
+        .forEach(option=>{
+            option.classList.remove("selected");
         });
 
 
-        options.forEach(function(option){
-
-            option.addEventListener("click", function(){
-
-                selectedText.innerHTML = this.innerHTML;
-
-                options.forEach(item=>{
-                    item.classList.remove("selected");
-                });
-
-                this.classList.add("selected");
-
-                dropdown.classList.remove("active");
-
-            });
-
-        });
+        sizeOption.classList.add("selected");
 
 
-        document.addEventListener("click", function(e){
+        dropdown.classList.remove("active");
 
-            if(!dropdown.contains(e.target)){
-                dropdown.classList.remove("active");
-            }
+    }
 
-        });
 
+
+    // Close dropdown when clicking outside
+    document.querySelectorAll(".custom-size-dropdown")
+    .forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            dropdown.classList.remove("active");
+
+        }
 
     });
 
-});
 
+});
 
 </script>
 
