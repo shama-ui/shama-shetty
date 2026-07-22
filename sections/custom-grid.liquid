@@ -49,31 +49,32 @@
                         id="product-{{ product.id }}"
                         hidden
                     >
+                        <div class="product-information">
+                            <div class="product-image">
+                            <img
+                                src="{{ product.featured_image | image_url: width:500 }}"
+                                width="500"
+                                height="500"
+                                alt="{{ product.title }}"
+                            >
+                            </div>
 
-                        <div class="product-image">
-                        <img
-                            src="{{ product.featured_image | image_url: width:500 }}"
-                            width="500"
-                            height="500"
-                            alt="{{ product.title }}"
-                        >
+                            <div class="product-desc">
+                                <h3>
+                                {{ product.title }}
+                                </h3>
+
+
+                                <div class="price">
+                                {{ product.price | money }}
+                                </div>
+
+
+                                <div class="description">
+                                {{ product.description | strip_html | truncate: 150 }}
+                                </div>
+                            </div>
                         </div>
-
-
-                        <h3>
-                        {{ product.title }}
-                        </h3>
-
-
-                        <div class="price">
-                        {{ product.price | money }}
-                        </div>
-
-
-                        <div class="description">
-                        {{ product.description | strip_html | truncate: 150 }}
-                        </div>
-
 
                         <a 
                         href="{{ product.url }}"
@@ -204,6 +205,12 @@
     {% comment %} display:grid;
     grid-template-columns:1fr 1fr;
     gap:25px; {% endcomment %}
+}
+
+.product-information{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
 }
 
 .tisso-popup-content img{
