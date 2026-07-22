@@ -559,6 +559,38 @@ document.addEventListener("click", function(event){
         color.classList.add("active");
 
     }
+
+    const dropdown = e.target.closest(".size-dropdown-btn");
+
+    if(dropdown){
+
+        dropdown.parentElement.classList.toggle("active");
+
+    }
+
+
+    const size = e.target.closest(".size-option");
+
+
+    if(size){
+
+        const wrapper = size.closest(".custom-size-dropdown");
+
+        wrapper.querySelector(".size-dropdown-btn")
+        .childNodes[0].textContent = size.textContent;
+
+
+        wrapper.querySelectorAll(".size-option")
+        .forEach(item=>{
+            item.classList.remove("selected");
+        });
+
+
+        size.classList.add("selected");
+
+        wrapper.classList.remove("active");
+
+    }
 });
 
 
