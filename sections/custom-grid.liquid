@@ -103,158 +103,91 @@
 </div>
 
 <style>
-
-
+    
 .tisso-container{
-  width:100%;
-  padding:40px 20px;
+    width:100%;
+    padding:40px 20px;
 }
-
 
 .tisso-header h2{
-
-  margin:0 0 30px;
-  font-size:42px;
-  font-weight:400;
-
+    margin:0 0 30px;
+    font-size:42px;
+    font-weight:400;
 }
-
-
 
 .tisso-grid{
-
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:25px;
-
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
 }
-
-
 
 .tisso-card{
-
- position:relative;
-
+    position:relative;
 }
-
-
 
 .tisso-image-wrapper{
-
- position:relative;
- overflow:hidden;
-
+    position:relative;
+    overflow:hidden;
 }
-
-
 
 .tisso-image-wrapper img{
-
- width:100%;
- height:100%;
- object-fit:cover;
- display:block;
-
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
-
-
-
 
 .tisso-plus{
-
- position:absolute;
-
- right:15px;
- bottom:15px;
-
- width:40px;
- height:40px;
-
- border-radius:50%;
-
- border:none;
-
- background:white;
-
- font-size:28px;
-
- cursor:pointer;
-
- display:flex;
- align-items:center;
- justify-content:center;
-
- box-shadow:0 2px 8px rgba(0,0,0,.2);
-
- transition:.3s;
-
+    position:absolute;
+    right:15px;
+    bottom:15px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:none;
+    background:white;
+    font-size:28px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.2);
+    transition:.3s;
 }
-
-
 
 .tisso-plus:hover{
-
- transform:scale(1.1);
-
+    transform:scale(1.1);
 }
-
-
-
-
 
 /* Modal */
 
-
 .tisso-modal{
-
- display:none;
-
- position:fixed;
-
- inset:0;
-
- z-index:9999;
-
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9999;
 }
-
-
 
 .tisso-modal.active{
-
- display:block;
-
+    display:block;
 }
-
-
 
 .tisso-overlay{
-
- position:absolute;
-
- inset:0;
-
- background:rgba(0,0,0,.5);
-
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.5);
 }
 
-
-
 .tisso-popup{
-
- position:relative;
-
- background:#fff;
-
- width:90%;
-
- max-width:700px;
-
- padding:30px;
-
- top:50%;
- left:50%;
- transform:translate(-50%,-50%);
- z-index:2;
+    position:relative;
+    background:#fff;
+    width:90%;
+    max-width:700px;
+    padding:30px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:2;
 }
 
 .tisso-close{
