@@ -45,8 +45,6 @@
 
                             <div class="product-options">
 
-                                
-                                <!-- COLOR FIRST -->
                                 {% for option in product.options_with_values %}
                                     {% if option.name == 'Color' %}
 
@@ -74,7 +72,6 @@
                                 {% endfor %}
 
 
-                                <!-- SIZE SECOND -->
                                 {% for option in product.options_with_values %}
                                     {% if option.name == 'Size' %}
 
