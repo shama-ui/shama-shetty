@@ -22,17 +22,22 @@
                             <button class="tisso-plus" type="button" data-product-id="product-{{ product.id }}">+</button>
                         </div>
                         <div id="product-{{ product.id }}" class="tisso-product-data" hidden>
-                            <img src="{{ product.featured_image | image_url: width:500 }}" 
+                            <div class="product-info">
+                                <img src="{{ product.featured_image | image_url: width:500 }}" 
                                 width="500"
                                 height="500"
                                 alt="{{  product.title }}">
-                            <h3>{{ product.title }}</h3>
-                            <div class="price">
-                            {{ product.price | money }}
-                            </div>
+                                <div> 
 
-                            <div>
-                            {{ product.description | strip_html | truncate:150 }}
+                                </div>
+                                <h3>{{ product.title }}</h3>
+                                <div class="price">
+                                {{ product.price | money }}
+                                </div>
+
+                                <div>
+                                {{ product.description | strip_html | truncate:150 }}
+                                </div>
                             </div>
 
                             <a href="{{ product.url }}" class="view-product">
@@ -49,32 +54,31 @@
                         id="product-{{ product.id }}"
                         hidden
                     >
-                        <div class="product-information">
-                            <div class="product-image">
-                            <img
-                                src="{{ product.featured_image | image_url: width:500 }}"
-                                width="500"
-                                height="500"
-                                alt="{{ product.title }}"
-                            >
-                            </div>
 
-                            <div class="product-desc">
-                                <h3>
-                                {{ product.title }}
-                                </h3>
-
-
-                                <div class="price">
-                                {{ product.price | money }}
-                                </div>
-
-
-                                <div class="description">
-                                {{ product.description | strip_html | truncate: 150 }}
-                                </div>
-                            </div>
+                        <div class="product-image">
+                        <img
+                            src="{{ product.featured_image | image_url: width:500 }}"
+                            width="500"
+                            height="500"
+                            alt="{{ product.title }}"
+                        >
                         </div>
+
+
+                        <h3>
+                        {{ product.title }}
+                        </h3>
+
+
+                        <div class="price">
+                        {{ product.price | money }}
+                        </div>
+
+
+                        <div class="description">
+                        {{ product.description | strip_html | truncate: 150 }}
+                        </div>
+
 
                         <a 
                         href="{{ product.url }}"
@@ -205,12 +209,6 @@
     {% comment %} display:grid;
     grid-template-columns:1fr 1fr;
     gap:25px; {% endcomment %}
-}
-
-.product-information{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
 }
 
 .tisso-popup-content img{
