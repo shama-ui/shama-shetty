@@ -40,7 +40,8 @@
                 class="tisso-plus"
                 type="button"
                 data-product-id="product-{{ product.id }}"
-              >
+                aria-label="View {{ product.title }}"
+                >
                 +
               </button>
 
@@ -417,61 +418,41 @@ grid-template-columns:1fr;
 
 <script>
 
+document.addEventListener("click", function(event){
 
-document.addEventListener("DOMContentLoaded",function(){
+  const button = event.target.closest(".tisso-plus");
 
+  if(button){
 
-const buttons=document.querySelectorAll(".tisso-plus");
+    const productId = button.getAttribute("data-product-id");
 
-const modal=document.querySelector(".tisso-modal");
+    const productData = document.getElementById(productId);
 
-const popupContent=document.querySelector(".tisso-popup-content");
+    if(productData){
 
-const close=document.querySelector(".tisso-close");
+      document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
 
-const overlay=document.querySelector(".tisso-overlay");
+      document.querySelector(".tisso-modal").classList.add("active");
 
+    } else {
 
+      console.log("Product data not found:", productId);
 
-buttons.forEach(button=>{
+    }
 
-
-button.addEventListener("click",function(){
-
-
-let productId=this.dataset.productId;
-
-
-let product=document.getElementById(productId);
+  }
 
 
-popupContent.innerHTML=product.innerHTML;
+  if(
+    event.target.classList.contains("tisso-close") ||
+    event.target.classList.contains("tisso-overlay")
+  ){
 
+    document.querySelector(".tisso-modal").classList.remove("active");
 
-modal.classList.add("active");
+    document.querySelector(".tisso-popup-content").innerHTML = "";
 
-
-});
-
-
-});
-
-
-
-function closeModal(){
-
-modal.classList.remove("active");
-
-popupContent.innerHTML="";
-
-}
-
-
-
-close.addEventListener("click",closeModal);
-
-overlay.addEventListener("click",closeModal);
-
+  }
 
 
 });
