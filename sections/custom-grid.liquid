@@ -19,37 +19,57 @@
 
           <div class="tisso-card">
 
-            <div class="tisso-image-wrapper">
+  <div class="tisso-image-wrapper">
 
-              {% if product.featured_image %}
+    <img
+      src="{{ product.featured_image | image_url: width:800 }}"
+      width="{{ product.featured_image.width }}"
+      height="{{ product.featured_image.height }}"
+      loading="lazy"
+      alt="{{ product.title }}"
+    >
 
-                <img
-                  src="{{ product.featured_image | image_url: width: 800 }}"
-                  width="{{ product.featured_image.width }}"
-                  height="{{ product.featured_image.height }}"
-                  loading="lazy"
-                  alt="{{ product.title }}"
-                >
+    <button 
+      class="tisso-plus"
+      type="button"
+      data-product-id="product-{{ product.id }}"
+    >
+      +
+    </button>
 
-              {% endif %}
-
-
-              <!-- Plus Button -->
-
-              <button 
-                class="tisso-plus"
-                type="button"
-                data-product-id="product-{{ product.id }}"
-                aria-label="View {{ product.title }}"
-                >
-                +
-              </button>
+  </div>
 
 
-            </div>
+  <div 
+    id="product-{{ product.id }}"
+    class="tisso-product-data"
+    hidden
+  >
 
+    <img
+      src="{{ product.featured_image | image_url: width:500 }}"
+      width="500"
+      height="500"
+      alt="{{ product.title }}"
+    >
 
-          </div>
+    <h3>{{ product.title }}</h3>
+
+    <div class="price">
+      {{ product.price | money }}
+    </div>
+
+    <div>
+      {{ product.description | strip_html | truncate:150 }}
+    </div>
+
+    <a href="{{ product.url }}" class="view-product">
+      View Product
+    </a>
+
+  </div>
+
+</div>
 
 
           <!-- Hidden Product Data -->
