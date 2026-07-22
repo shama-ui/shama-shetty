@@ -450,6 +450,21 @@ document.addEventListener("click", function(event){
 
     document.querySelector(".tisso-popup-content").innerHTML = "";
   }
+
+  const color = event.target.closest(".color-item");
+
+
+    if(color){
+
+        document.querySelectorAll(".color-item")
+        .forEach(item=>{
+            item.classList.remove("active");
+        });
+
+
+        color.classList.add("active");
+
+    }
 });
 
 
