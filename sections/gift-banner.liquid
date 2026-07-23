@@ -27,12 +27,12 @@
   </div>
 
   <div class="mobile-menu">
-    <ul>
-        <li><a href="#">NEW ARRIVALS</a></li>
-        <li><a href="#">SHOP</a></li>
-        <li><a href="#">GIFTS</a></li>
-        <li><a href="#">ABOUT US</a></li>
-    </ul>
+    <p>{{ section.settings.description }}</p>
+
+    <a href="{{ section.settings.button_link }}" class="gift-banner__button">
+      {{ section.settings.button_text }}
+      <span>→</span>
+    </a>
   </div>
 
   <div class="gift-banner__full-image">
