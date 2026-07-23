@@ -102,7 +102,7 @@
 }
 
 .mobile-menu, .mobile-menu.active{
-opacity:0
+    display:none;
 }
 
 
@@ -282,12 +282,11 @@ opacity:0
   }
 
   .mobile-menu{
-    {% comment %} display:none; {% endcomment %}
+    display:none;
     background: #F2F2F2;
     padding:25px;
     text-align: center;
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease, display 0.3s ease;
   }
 
   .mobile-menu p{
@@ -299,7 +298,7 @@ opacity:0
 
   .mobile-menu.active{
     transform: scale(1);
-    opacity: 1;
+    display: block;
     position:absolute;
     width:100%;
     
