@@ -352,23 +352,26 @@
     background: #fff;
 }
 
+.size-arrow-container{
+    width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid black;
+}
 
-.size-arrow {
+
+.size-arrow-container .size-arrow {
     width: 12px;
     height: 6px;
     transition: .3s ease;
-    {% comment %} margin-top: -5px; {% endcomment %}
-    {% comment %} border-right: 1px solid #333;
-    border-bottom: 1px solid #333;
-    transform: rotate(45deg);
-     {% endcomment %}
 }
 
 
 /* rotate arrow when open */
-.custom-size-dropdown.active .size-arrow {
+.custom-size-dropdown.active .size-arrow-container .size-arrow {
     transform: rotate(180deg);
-    {% comment %} margin-top: 5px; {% endcomment %}
 }
 
 
