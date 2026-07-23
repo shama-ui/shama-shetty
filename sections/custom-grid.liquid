@@ -548,38 +548,115 @@ if(plus){
     product.options.forEach(option=>{
 
 
-        html += `
+html += `
 
-        <div class="option-title">
-            ${option.name}
-        </div>
-
-        <div class="variant-options"
-             data-option="${option.name}">
-        `;
+<div class="option-title">
+${option.name}
+</div>
+`;
 
 
-        option.values.forEach(value=>{
+// COLOR BUTTONS
 
-            html += `
-
-            <button 
-            class="variant-button"
-            data-value="${value}">
-                ${value}
-            </button>
-
-            `;
-
-        });
+if(option.name.toLowerCase() === "color"){
 
 
-        html += `
-        </div>
-        `;
+html += `
+
+<div class="variant-options"
+data-option="${option.name}">
+
+`;
+
+option.values.forEach(value=>{
 
 
-    });
+html += `
+
+<button 
+class="variant-button"
+data-value="${value}">
+${value}
+</button>
+
+`;
+
+
+});
+
+
+html += `</div>`;
+
+
+}
+
+
+// SIZE DROPDOWN
+
+else if(option.name.toLowerCase() === "size"){
+
+
+html += `
+
+<div class="custom-size-dropdown variant-options"
+data-option="${option.name}">
+
+
+<div class="size-dropdown-selected">
+
+<span>
+Choose your size
+</span>
+
+
+<div class="size-arrow-container">
+
+<img 
+src="{{ 'dropdown-arrow.svg' | asset_url }}"
+width="12"
+height="6">
+
+</div>
+
+
+</div>
+
+
+
+<div class="size-dropdown-options">
+
+`;
+
+
+
+option.values.forEach(value=>{
+
+
+html += `
+
+<div 
+class="size-option"
+data-value="${value}">
+${value}
+</div>
+
+`;
+
+});
+
+
+html += `
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+});
 
 
 
