@@ -545,7 +545,21 @@ document.addEventListener("click", function(event){
 
             document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
 
-            document.querySelector(".tisso-modal").classList.add("active");
+            const productJSON = productData.dataset.productJson;
+
+            document.querySelector(".tisso-popup-content")
+            .setAttribute("data-product-json", productJSON);
+
+
+            // Default variant
+            const product = JSON.parse(productJSON);
+
+            document.querySelector(".selected-variant-id").value =
+                product.variants[0].id;
+
+
+            document.querySelector(".tisso-modal")
+            .classList.add("active");
 
         }
 
@@ -573,6 +587,8 @@ document.addEventListener("click", function(event){
         });
 
         color.classList.add("active");
+
+        updateVariant();
 
     }
 
@@ -632,6 +648,64 @@ document.addEventListener("click", function(event){
         }
 
     });
+
+    function updateVariant(){
+
+    const popup = document.querySelector(".tisso-popup-content");
+
+    const productJSON = popup.dataset.productJson;
+
+    if(!productJSON) return;
+
+
+    const product = JSON.parse(productJSON);
+
+
+    let selectedOptions = [];
+
+
+    // Color
+    const selectedColor = popup.querySelector(".color-item.active");
+
+    if(selectedColor){
+        selectedOptions.push(
+            selectedColor.dataset.color
+        );
+    }
+
+
+    // Size
+    const selectedSize = popup.querySelector(".size-option.selected");
+
+    if(selectedSize){
+        selectedOptions.push(
+            selectedSize.dataset.value
+        );
+    }
+
+
+
+    const variant = product.variants.find(v=>{
+
+        return v.options.every((option,index)=>{
+
+            return option.toLowerCase() ==
+            selectedOptions[index]?.toLowerCase();
+
+        });
+
+    });
+
+
+
+    if(variant){
+
+        popup.querySelector(".selected-variant-id").value =
+        variant.id;
+
+    }
+
+}
 
 
 });
