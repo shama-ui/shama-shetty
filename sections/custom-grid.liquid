@@ -46,8 +46,6 @@
                                 </div>
                             </div>
 
-                            <!-- Product Options -->
-
                             <div class="product-options">
                                 <input 
                                 type="hidden" 
@@ -103,7 +101,6 @@
                                                     >
                                                 </div>
                                             </div>
-                                            {% comment %} <span class="size-arrow"></span> {% endcomment %}
                                         </div>
 
                                         <div class="size-dropdown-options">
@@ -553,7 +550,7 @@ document.addEventListener("click", function(event){
 
 
 
-    // SIZE DROPDOWN OPEN
+    // Size dropdown open
     const dropdownSelected = event.target.closest(".size-dropdown-selected");
 
     if(dropdownSelected){
@@ -566,7 +563,6 @@ document.addEventListener("click", function(event){
 
 
 
-    // SIZE OPTION SELECT
     const sizeOption = event.target.closest(".size-option");
 
     if(sizeOption){
@@ -577,9 +573,7 @@ document.addEventListener("click", function(event){
             ".size-dropdown-selected span:first-child"
         );
 
-
         selectedText.textContent = sizeOption.textContent;
-
 
         dropdown.querySelectorAll(".size-option")
         .forEach(option=>{
