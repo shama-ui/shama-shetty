@@ -123,11 +123,10 @@
                             </div>
 
                             <button 
-                                type="button"
-                                class="view-product add-to-cart-btn"
-                            >
-                                ADD TO CART
-                                <span>→</span>
+                            type="button"
+                            class="view-product add-to-cart-btn">
+                            ADD TO CART
+                            <span>→</span>
                             </button>
 
                         </div>
@@ -140,7 +139,10 @@
                         id="product-{{ product.id }}"
                         hidden
                     >
-
+                        <input 
+                        type="hidden" 
+                        class="selected-variant-id"
+                        >
                         <div class="product-image">
                         <img
                             src="{{ product.featured_image | image_url: width:500 }}"
@@ -577,16 +579,18 @@ document.addEventListener("click", function(event){
 
 
     // Color selection
-    const color = event.target.closest(".color-item");
+    const color = e.target.closest(".color-item");
 
     if(color){
 
-        color.parentElement.querySelectorAll(".color-item")
+        document.querySelectorAll(".color-item")
         .forEach(item=>{
             item.classList.remove("active");
         });
 
+
         color.classList.add("active");
+
 
         updateVariant();
 
@@ -614,13 +618,6 @@ document.addEventListener("click", function(event){
 
         const dropdown = sizeOption.closest(".custom-size-dropdown");
 
-        const selectedText = dropdown.querySelector(
-            ".size-dropdown-selected span:first-child"
-        );
-
-
-        selectedText.textContent = sizeOption.textContent;
-
 
         dropdown.querySelectorAll(".size-option")
         .forEach(option=>{
@@ -629,10 +626,16 @@ document.addEventListener("click", function(event){
 
 
         sizeOption.classList.add("selected");
-        updateVariant();
+
+
+        dropdown.querySelector(".size-dropdown-selected span")
+        .textContent = sizeOption.textContent;
 
 
         dropdown.classList.remove("active");
+
+
+        updateVariant();
 
     }
 
