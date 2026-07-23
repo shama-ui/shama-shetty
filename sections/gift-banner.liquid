@@ -102,8 +102,7 @@
 }
 
 .mobile-menu, .mobile-menu.active{
-    {% comment %} display:none; {% endcomment %}
-     height:0;
+    display:none;
 }
 
 
@@ -283,12 +282,10 @@
   }
 
   .mobile-menu{
-    {% comment %} display:none; {% endcomment %}
+    display:none;
     background: #F2F2F2;
     padding:25px;
     text-align: center;
-    height:0;
-    transition: transform 0.3s ease, height 0.3s ease;
   }
 
   .mobile-menu p{
@@ -299,9 +296,7 @@
   }
 
   .mobile-menu.active{
-    transform: scale(1);
-    height:300px;
-    {% comment %} display: block; {% endcomment %}
+    display:block;
     position:absolute;
     width:100%;
     
