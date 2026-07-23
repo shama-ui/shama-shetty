@@ -2,13 +2,15 @@
 
   <!-- First Row: Content -->
   <div class="gift-banner__intro page-width">
-    <img
+    <div class="hamburger-image">
+        <img
         src="{{ 'hamburger-menu.svg' | asset_url }}"
         alt="{{ section.settings.heading }}"
-        loading="lazy"
-        width="2000"
-        height="auto"
-    >
+        width="18"
+        height="10"
+        >
+    </div>
+    
     <h1>{{ section.settings.heading }}</h1>
 
     <p>{{ section.settings.description }}</p>
@@ -109,7 +111,7 @@
   background-color: #F5F5F5;
 }
 
-.gift-banner__intro img{
+.gift-banner__intro .hamburger-image{
     display:none;
 }
 
@@ -297,13 +299,10 @@
 
   .gift-banner__intro{
     justify-content: center;
-    position:relative;
   }
 
-  .gift-banner__intro img{
+  .gift-banner__intro .hamburger-image{
     display:block;
-    position:absolute;
-    left:10px;
   }
 
   .gift-banner__intro h1{
