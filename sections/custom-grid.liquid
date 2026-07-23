@@ -514,7 +514,7 @@
 <script>
 document.addEventListener("click", function(event){
 
-    // Open product popup
+    // To open product popup
     const button = event.target.closest(".tisso-plus");
 
     if(button){
@@ -538,7 +538,7 @@ document.addEventListener("click", function(event){
     }
 
 
-    // Close popup
+    // To close the popup
     if(event.target.closest(".tisso-close")){
 
         document.querySelector(".tisso-modal").classList.remove("active");
@@ -623,7 +623,6 @@ document.addEventListener("click", function(event){
 
         const popup = document.querySelector(".tisso-popup-content");
 
-
         const productData = JSON.parse(
             popup.querySelector(".tisso-product-data")?.dataset.product || "{}"
         );
@@ -639,7 +638,6 @@ document.addEventListener("click", function(event){
             selectedColor = color.dataset.color;
         }
 
-
         const size = popup.querySelector(".size-option.selected");
 
         if(size){
@@ -654,55 +652,36 @@ document.addEventListener("click", function(event){
 
         productData.variants.forEach(function(variant){
 
-
             let match = true;
 
-
             productData.options.forEach(function(option,index){
-
-
                 if(option === "Color" && selectedColor){
-
                     if(variant.options[index] !== selectedColor){
                         match=false;
                     }
-
                 }
 
 
                 if(option === "Size" && selectedSize){
-
                     if(variant.options[index] !== selectedSize){
                         match=false;
                     }
-
                 }
-
-
             });
-
-
 
             if(match){
                 variantId = variant.id;
             }
-
-
         });
 
 
 
         if(!variantId){
-
             alert("Please select available options");
             return;
-
         }
 
-
-
         fetch('/cart/add.js', {
-
             method:'POST',
 
             headers:{
@@ -710,29 +689,18 @@ document.addEventListener("click", function(event){
             },
 
             body:JSON.stringify({
-
                 items:[{
-
                     id:variantId,
-
                     quantity:1
-
                 }]
-
             })
-
         })
 
         .then(response=>response.json())
 
         .then(data=>{
 
-
-            console.log("Added:",data);
-
-
             alert("Product added to cart");
-
 
             document.querySelector(".tisso-modal")
             .classList.remove("active");
@@ -741,12 +709,8 @@ document.addEventListener("click", function(event){
         })
 
         .catch(error=>{
-
             console.error(error);
-
         });
-
-
 
     }
 
