@@ -408,44 +408,31 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
 
-        const menuIcon = document.querySelector(".menu-icon");
-        const dropdown = document.querySelector(".mobile-dropdown");
+    document.querySelectorAll(".gift-banner__intro").forEach(function(banner){
 
-        if (!menuIcon || !dropdown) return;
+        const button = banner.querySelector(".hamburger-toggle");
+        const dropdown = banner.querySelector(".mobile-dropdown");
+        const icon = banner.querySelector(".menu-icon");
 
-        menuIcon.addEventListener("click", function () {
+        if(!button || !dropdown || !icon) return;
 
-            dropdown.classList.toggle("open");
+        button.addEventListener("click", function(){
 
-            if (dropdown.classList.contains("open")) {
-            menuIcon.src = menuIcon.dataset.close;
-            menuIcon.classList.add("rotate");
-            } else {
-            menuIcon.src = menuIcon.dataset.menu;
-            menuIcon.classList.remove("rotate");
-            }
+        dropdown.classList.toggle("active");
+
+        if(dropdown.classList.contains("active")){
+            icon.src = icon.dataset.close;
+            icon.alt = "Close";
+        }else{
+            icon.src = icon.dataset.menu;
+            icon.alt = "Menu";
+        }
 
         });
 
     });
 
-    document.addEventListener("click", function (e) {
-        const toggle = e.target.closest(".hamburger-toggle");
-
-        if (!toggle) return;
-
-        const banner = toggle.closest(".gift-banner__intro");
-        const dropdown = banner.querySelector(".mobile-dropdown");
-        const icon = banner.querySelector(".menu-icon");
-
-        dropdown.classList.toggle("open");
-
-        if (dropdown.classList.contains("open")) {
-            icon.src = icon.dataset.close;
-        } else {
-            icon.src = icon.dataset.menu;
-        }
-    });
+    }); 
 </script>
 
 
