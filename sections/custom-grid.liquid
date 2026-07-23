@@ -437,95 +437,12 @@
 </style>
 
 <script>
-document.addEventListener("click", function(event){
-
-    // Open product popup
-    const button = event.target.closest(".tisso-plus");
-
-    if(button){
-
-        const productId = button.getAttribute("data-product-id");
-        const productData = document.getElementById(productId);
-
-        if(productData){
-
-            document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
-
-            document.querySelector(".tisso-modal").classList.add("active");
-
-        }
-
-    }
+    document.addEventListener("click", function(event){
 
 
-    // Close popup
-    if(event.target.closest(".tisso-close")){
+/* OPEN POPUP */
 
-        document.querySelector(".tisso-modal").classList.remove("active");
-        document.querySelector(".tisso-popup-content").innerHTML = "";
-
-    }
-
-
-
-    // Color selection
-    const color = event.target.closest(".color-item");
-
-    if(color){
-
-        color.parentElement.querySelectorAll(".color-item")
-        .forEach(item=>{
-            item.classList.remove("active");
-        });
-
-        color.classList.add("active");
-
-    }
-
-
-
-    // SIZE DROPDOWN OPEN
-    const dropdownSelected = event.target.closest(".size-dropdown-selected");
-
-    if(dropdownSelected){
-
-        const dropdown = dropdownSelected.closest(".custom-size-dropdown");
-
-        dropdown.classList.toggle("active");
-
-    }
-
-
-
-    // SIZE OPTION SELECT
-    const sizeOption = event.target.closest(".size-option");
-
-    if(sizeOption){
-
-        const dropdown = sizeOption.closest(".custom-size-dropdown");
-
-        const selectedText = dropdown.querySelector(
-            ".size-dropdown-selected span:first-child"
-        );
-
-
-        selectedText.textContent = sizeOption.textContent;
-
-
-        dropdown.querySelectorAll(".size-option")
-        .forEach(option=>{
-            option.classList.remove("selected");
-        });
-
-
-        sizeOption.classList.add("selected");
-
-
-        dropdown.classList.remove("active");
-
-    }
-
-    const plus = event.target.closest(".tisso-plus");
+const plus = event.target.closest(".tisso-plus");
 
 
 if(plus){
@@ -809,6 +726,93 @@ document.querySelector(
 
 
 });
+{% comment %} document.addEventListener("click", function(event){
+
+    // Open product popup
+    const button = event.target.closest(".tisso-plus");
+
+    if(button){
+
+        const productId = button.getAttribute("data-product-id");
+        const productData = document.getElementById(productId);
+
+        if(productData){
+
+            document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
+
+            document.querySelector(".tisso-modal").classList.add("active");
+
+        }
+
+    }
+
+
+    // Close popup
+    if(event.target.closest(".tisso-close")){
+
+        document.querySelector(".tisso-modal").classList.remove("active");
+        document.querySelector(".tisso-popup-content").innerHTML = "";
+
+    }
+
+
+
+    // Color selection
+    const color = event.target.closest(".color-item");
+
+    if(color){
+
+        color.parentElement.querySelectorAll(".color-item")
+        .forEach(item=>{
+            item.classList.remove("active");
+        });
+
+        color.classList.add("active");
+
+    }
+
+
+
+    // SIZE DROPDOWN OPEN
+    const dropdownSelected = event.target.closest(".size-dropdown-selected");
+
+    if(dropdownSelected){
+
+        const dropdown = dropdownSelected.closest(".custom-size-dropdown");
+
+        dropdown.classList.toggle("active");
+
+    }
+
+
+
+    // SIZE OPTION SELECT
+    const sizeOption = event.target.closest(".size-option");
+
+    if(sizeOption){
+
+        const dropdown = sizeOption.closest(".custom-size-dropdown");
+
+        const selectedText = dropdown.querySelector(
+            ".size-dropdown-selected span:first-child"
+        );
+
+
+        selectedText.textContent = sizeOption.textContent;
+
+
+        dropdown.querySelectorAll(".size-option")
+        .forEach(option=>{
+            option.classList.remove("selected");
+        });
+
+
+        sizeOption.classList.add("selected");
+
+
+        dropdown.classList.remove("active");
+
+    }
 
 
 
@@ -825,7 +829,7 @@ document.querySelector(
     });
 
 
-});
+}); {% endcomment %}
 
 </script>
 
