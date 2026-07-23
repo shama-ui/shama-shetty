@@ -726,96 +726,103 @@ document.addEventListener("click", function(event){
     const addCartButton = event.target.closest(".add-to-cart-btn");
 
 
-if(addCartButton){
+    if(addCartButton){
 
-    const productBox = document.querySelector(".tisso-popup-content");
-
-
-    const variants = JSON.parse(
-        productBox.querySelector(".product-variants").textContent
-    );
+        const productBox = document.querySelector(".tisso-popup-content");
 
 
-    let selectedOptions = [];
+        const variantData = productBox.querySelector(".product-variants");
 
+        if(!variantData){
+            console.log("Variant data missing");
+            return;
+        }
 
-    // selected color
-    const selectedColor = productBox.querySelector(".color-item.active");
-
-    if(selectedColor){
-        selectedOptions.push(selectedColor.dataset.color);
-    }
-
-
-    // selected size
-    const selectedSize = productBox.querySelector(".size-option.selected");
-
-    if(selectedSize){
-        selectedOptions.push(selectedSize.dataset.value);
-    }
-
-
-
-    let selectedVariant = variants.find(variant=>{
-
-        return variant.options.every(option =>
-            selectedOptions.includes(option)
+        const variants = JSON.parse(
+            variantData.textContent
         );
 
-    });
+
+        let selectedOptions = [];
+
+
+        // selected color
+        const selectedColor = productBox.querySelector(".color-item.active");
+
+        if(selectedColor){
+            selectedOptions.push(selectedColor.dataset.color);
+        }
+
+
+        // selected size
+        const selectedSize = productBox.querySelector(".size-option.selected");
+
+        if(selectedSize){
+            selectedOptions.push(selectedSize.dataset.value);
+        }
 
 
 
-    if(!selectedVariant){
+        let selectedVariant = variants.find(variant=>{
 
-        alert("Please select color and size");
+            return variant.options.every(option =>
+                selectedOptions.includes(option)
+            );
 
-        return;
-
-    }
+        });
 
 
 
-    fetch('/cart/add.js',{
+        if(!selectedVariant){
 
-        method:"POST",
+            alert("Please select color and size");
 
-        headers:{
-            "Content-Type":"application/json",
-            "Accept":"application/json"
-        },
+            return;
 
-        body:JSON.stringify({
+        }
 
-            id:selectedVariant.id,
-            quantity:1
+
+
+        fetch('/cart/add.js',{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json",
+                "Accept":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                id:selectedVariant.id,
+                quantity:1
+
+            })
 
         })
 
-    })
+        .then(response=>response.json())
 
-    .then(response=>response.json())
+        .then(data=>{
 
-    .then(data=>{
-
-        console.log("Added:",data);
+            console.log("Added:",data);
 
 
-        document.querySelector(".tisso-modal")
-        .classList.remove("active");
+            document.querySelector(".tisso-modal")
+            .classList.remove("active");
 
 
-        window.location.href="/cart";
+            window.location.href="/cart";
 
-    })
+        })
 
-    .catch(error=>{
+        .catch(error=>{
 
-        console.log("Cart Error:",error);
+            console.log("Cart Error:",error);
 
-    });
+        });
 
-}
+    }
 
 
 });
