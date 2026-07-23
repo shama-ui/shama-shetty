@@ -19,7 +19,12 @@
                                 loading="lazy"
                                 alt="{{  product.title }}">
                             
-                            <button class="tisso-plus" type="button" data-product-id="product-{{ product.id }}">+</button>
+                            <button class="tisso-plus" type="button" data-product-id="product-{{ product.id }}">
+                                <img src="{{ tisso-plus-icon.svg | image_url }}" 
+                                width="15"
+                                height="15"
+                                alt="{{  product.title }}">
+                            </button>
                         </div>
                         <div id="product-{{ product.id }}" class="tisso-product-data" hidden>
                             <div class="product-info">
