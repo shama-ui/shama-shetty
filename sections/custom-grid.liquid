@@ -608,6 +608,117 @@ document.addEventListener("click", function(event){
 
     });
 
+    function updateVariant(productBox){
+
+        if(!productBox) return;
+
+
+        const variants = JSON.parse(
+            productBox.querySelector(".add-to-cart-btn")
+            .dataset.variants
+        );
+
+
+        let selectedColor = "";
+        let selectedSize = "";
+
+
+        const color = productBox.querySelector(".color-item.active");
+
+        if(color){
+            selectedColor = color.dataset.color;
+        }
+
+
+        const size = productBox.querySelector(".size-option.selected");
+
+        if(size){
+            selectedSize = size.dataset.value;
+        }
+
+
+        const matchedVariant = variants.find(variant=>{
+
+            return variant.options.includes(selectedColor) &&
+                variant.options.includes(selectedSize);
+
+        });
+
+
+        if(matchedVariant){
+
+            productBox.querySelector(".selected-variant-id").value =
+            matchedVariant.id;
+
+        }
+
+    }
+
+    const addButton = event.target.closest(".add-to-cart-btn");
+
+
+    if(addButton){
+
+        const productBox = addButton.closest(".tisso-product-data");
+
+
+        const variantId = productBox.querySelector(
+            ".selected-variant-id"
+        ).value;
+
+
+        if(!variantId){
+
+            alert("Please select product options");
+
+            return;
+
+        }
+
+
+        fetch('/cart/add.js',{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                id:variantId,
+
+                quantity:1
+
+            })
+
+        })
+        .then(response=>response.json())
+
+        .then(data=>{
+
+            console.log("Added to cart",data);
+
+
+            // optional close popup
+            document.querySelector(".tisso-modal")
+            .classList.remove("active");
+
+
+            // update cart drawer/count if your theme has one
+            window.location.href="/cart";
+
+        })
+
+        .catch(error=>{
+
+            console.error("Cart Error:",error);
+
+        });
+
+
+    }
+
 
 });
 
