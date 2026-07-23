@@ -41,22 +41,27 @@
 
     <div class="gift-banner__image">
 
-    <img
-        src="{{ 'banner-image-two.svg' | asset_url }}"
-        alt="{{ section.settings.second_heading }}"
-        class="desktop-image"
-        loading="lazy"
-        width="1200"
-        height="800"
-    >
-    <img
-        src="{{ 'mobile-banner-image.svg' | asset_url }}"
-        alt="{{ section.settings.second_heading }}"
-        class="mobile-image"
-        loading="lazy"
-        width="1200"
-        height="800"
-    >
+        <img
+            src="{{ 'banner-image-two.svg' | asset_url }}"
+            alt="{{ section.settings.second_heading }}"
+            class="desktop-image"
+            loading="lazy"
+            width="1200"
+            height="800"
+        >
+        <img
+            src="{{ 'mobile-banner-image.svg' | asset_url }}"
+            alt="{{ section.settings.second_heading }}"
+            class="mobile-image"
+            loading="lazy"
+            width="1200"
+            height="800"
+        >
+        
+        <a href="{{ section.settings.second_button_link }}" class="gift-banner__button_two">
+        {{ section.settings.second_button_text }}
+        <span>→</span>
+        </a>
 
     </div>
 
