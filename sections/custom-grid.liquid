@@ -19,112 +19,24 @@
                                 loading="lazy"
                                 alt="{{  product.title }}">
                             
-                            <button class="tisso-plus" type="button" data-product-id="product-{{ product.id }}">
+                            <button class="tisso-plus" data-product-id="{{ product.id }}">
                                 <img src="{{ 'tisso-plus-icon.svg' | asset_url }}" 
                                 width="15"
                                 height="15"
                                 alt="plus-icon">
                             </button>
                         </div>
-                        <div id="product-{{ product.id }}" class="tisso-product-data" hidden>
-                            <div class="product-info">
-                                <div class="product-img-wrapper">
-                                    <img src="{{ product.featured_image | image_url: width:500 }}" 
-                                    width="500"
-                                    height="500"
-                                    alt="{{  product.title }}">
-                                </div>
-                                <div class="product-description"> 
-                                    <h3>{{ product.title }}</h3>
-                                    <div class="price">
-                                    {{ product.price | money }}
-                                    </div>
-
-                                    <div class="description">
-                                    {{ product.description | strip_html | truncate:150 }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Options -->
-
-                            <div class="product-options">
-
-                                {% for option in product.options_with_values %}
-                                    {% if option.name == 'Color' %}
-
-                                        <div class="color-option-title">
-                                            Color
-                                        </div>
-
-                                        <div class="color-options">
-
-                                            {% for value in option.values %}
-
-                                                <button 
-                                                    class="color-item"
-                                                    data-color="{{ value }}"
-                                                    style="--color: {{ value | downcase }};"
-                                                >
-                                                    {{ value }}
-                                                </button>
-
-                                            {% endfor %}
-
-                                        </div>
-
-                                    {% endif %}
-                                {% endfor %}
-
-
-                                {% for option in product.options_with_values %}
-                                    {% if option.name == 'Size' %}
-
-                                        <div class="size-option-title">
-                                        Size
-                                        </div>
-
-                                        <div class="custom-size-dropdown">
-
-                                        <div class="size-dropdown-selected">
-                                            <span>Choose your size</span>
-                                            <div class="size-arrow-container">
-                                                <div class="size-arrow">
-                                                    <img
-                                                        src="{{ 'dropdown-arrow.svg' | asset_url }}"
-                                                        alt="arrow"
-                                                        width="100%"
-                                                        height="100%"
-                                                    >
-                                                </div>
-                                            </div>
-                                            {% comment %} <span class="size-arrow"></span> {% endcomment %}
-                                        </div>
-
-                                        <div class="size-dropdown-options">
-
-                                            {% for value in option.values %}
-                                            <div class="size-option" data-value="{{ value }}">
-                                                {{ value }}
-                                            </div>
-                                            {% endfor %}
-
-                                        </div>
-
-                                        </div>
-
-                                    {% endif %}
-                                {% endfor %}
-
-
-                            </div>
-
-                            <a href="{{ product.url }}" class="view-product">
-                            ADD TO CART
-                            <span>→</span>
-                            </a>
-
-                        </div>
+                        <script type="application/json" id="product-data-{{ product.id }}">
+                            {
+                            "id": "{{ product.id }}",
+                            "title": {{ product.title | json }},
+                            "price": "{{ product.price | money }}",
+                            "description": {{ product.description | strip_html | truncate:150 | json }},
+                            "image": "{{ product.featured_image | image_url: width:500 }}",
+                            "variants": {{ product.variants | json }},
+                            "options": {{ product.options_with_values | json }}
+                            }
+                        </script>
                     </div>
 
                     <!-- Hidden Product Data -->
