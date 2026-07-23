@@ -121,9 +121,9 @@
                             <input type="hidden" class="selected-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
 
                             <button 
+                                type="button"
                                 class="view-product add-to-cart-btn"
-                                data-product-id="{{ product.id }}"
-                                data-variants='{{ product.variants | json }}'
+                                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
                             >
                                 ADD TO CART
                                 <span>→</span>
