@@ -10,7 +10,7 @@
         <div class="tisso-grid">
             {% assign collection = collections[section.settings.collection] %}
             {% if collection != blank %}
-                {% for product in collection.products %}
+                {% for product in collection.products limit: 6 %}
                     <div class="tisso-card">
                         <div class="tisso-image-wrapper">
                             <img src="{{ product.featured_image | image_url: width:800 }}" 
