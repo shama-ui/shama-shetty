@@ -83,7 +83,14 @@
 
                                         <div class="size-dropdown-selected">
                                             <span>Choose your size</span>
-                                            <span class="size-arrow"></span>
+                                            <img
+                                                src="{{ 'banner-image1.svg' | asset_url }}"
+                                                alt="{{ section.settings.heading }}"
+                                                loading="lazy"
+                                                width="2000"
+                                                height="auto"
+                                            >
+                                            {% comment %} <span class="size-arrow"></span> {% endcomment %}
                                         </div>
 
                                         <div class="size-dropdown-options">
