@@ -129,46 +129,7 @@
 
                     <!-- Hidden Product Data -->
 
-                    <div 
-                        class="tisso-product-data"
-                        id="product-{{ product.id }}"
-                        hidden
-                    >
-
-                        <div class="product-image">
-                        <img
-                            src="{{ product.featured_image | image_url: width:500 }}"
-                            width="500"
-                            height="500"
-                            alt="{{ product.title }}"
-                        >
-                        </div>
-
-
-                        <h3>
-                        {{ product.title }}
-                        </h3>
-
-
-                        <div class="price">
-                        {{ product.price | money }}
-                        </div>
-
-
-                        <div class="description">
-                        {{ product.description | strip_html | truncate: 150 }}
-                        </div>
-
-
-                        <a 
-                        href="{{ product.url }}"
-                        class="view-product"
-                        >
-                        View Product
-                        </a>
-
-
-                    </div>
+                    
                 {% endfor %}
             {% endif %}
         </div>
