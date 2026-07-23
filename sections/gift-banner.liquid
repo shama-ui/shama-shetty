@@ -2,28 +2,16 @@
 
   <!-- First Row: Content -->
   <div class="gift-banner__intro page-width">
-    <button class="hamburger-toggle" type="button" aria-label="Toggle menu">
-      <img
-        class="menu-icon"
+    <div class="hamburger-image">
+        <img
         src="{{ 'hamburger-menu.svg' | asset_url }}"
-        data-menu="{{ 'hamburger-menu.svg' | asset_url }}"
-        data-close="{{ 'tisso-popup-close.svg' | asset_url }}"
-        alt="Menu"
-        width="24"
-        height="24"
-      >
-    </button>
-        
-    <h1>{{ section.settings.heading }}</h1>
-
-    <div class="mobile-dropdown">
-        <p>{{ section.settings.description }}</p>
-
-        <a href="{{ section.settings.button_link }}" class="gift-banner__button">
-        {{ section.settings.button_text }}
-        <span>→</span>
-        </a>
+        alt="{{ section.settings.heading }}"
+        width=""
+        height=""
+        >
     </div>
+    
+    <h1>{{ section.settings.heading }}</h1>
 
     <p>{{ section.settings.description }}</p>
 
@@ -322,39 +310,6 @@
     left:16px
   }
 
-  .hamburger-toggle{
-    border:none;
-    background:transparent;
-    padding:0;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.menu-icon{
-    width:24px;
-    height:24px;
-    display:block;
-    transition:all .3s ease;
-}
-
-.mobile-dropdown{
-    display:none;
-    margin-top:20px;
-}
-
-.mobile-dropdown.active{
-    display:block;
-}
-
-.gift-banner__button{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    margin-top:16px;
-}
-
   .gift-banner__intro h1{
     font-size:36px;
   }
@@ -404,36 +359,6 @@
 }
 
 </style>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-
-    document.querySelectorAll(".gift-banner__intro").forEach(function(banner){
-
-        const button = banner.querySelector(".hamburger-toggle");
-        const dropdown = banner.querySelector(".mobile-dropdown");
-        const icon = banner.querySelector(".menu-icon");
-
-        if(!button || !dropdown || !icon) return;
-
-        button.addEventListener("click", function(){
-
-        dropdown.classList.toggle("active");
-
-        if(dropdown.classList.contains("active")){
-            icon.src = icon.dataset.close;
-            icon.alt = "Close";
-        }else{
-            icon.src = icon.dataset.menu;
-            icon.alt = "Menu";
-        }
-
-        });
-
-    });
-
-    }); 
-</script>
 
 
 {% schema %}
