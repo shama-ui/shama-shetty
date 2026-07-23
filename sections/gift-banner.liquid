@@ -349,6 +349,14 @@
     transform: rotate(180deg);
     }
 
+    .mobile-dropdown {
+    display: none;
+    }
+
+    .mobile-dropdown.open {
+    display: block;
+    }
+
   .gift-banner__intro h1{
     font-size:36px;
   }
@@ -400,27 +408,24 @@
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    
 
-        const menuIcon = document.querySelector(".menu-icon");
-        const dropdown = document.querySelector(".mobile-dropdown");
+    document.addEventListener("click", function (e) {
+        const toggle = e.target.closest(".hamburger-toggle");
 
-        if (!menuIcon || !dropdown) return;
+        if (!toggle) return;
 
-        menuIcon.addEventListener("click", function () {
+        const banner = toggle.closest(".gift-banner__intro");
+        const dropdown = banner.querySelector(".mobile-dropdown");
+        const icon = banner.querySelector(".menu-icon");
 
-            dropdown.classList.toggle("open");
+        dropdown.classList.toggle("open");
 
-            if (dropdown.classList.contains("open")) {
-            menuIcon.src = menuIcon.dataset.close;
-            menuIcon.classList.add("rotate");
-            } else {
-            menuIcon.src = menuIcon.dataset.menu;
-            menuIcon.classList.remove("rotate");
-            }
-
-        });
-
+        if (dropdown.classList.contains("open")) {
+            icon.src = icon.dataset.close;
+        } else {
+            icon.src = icon.dataset.menu;
+        }
     });
 </script>
 
