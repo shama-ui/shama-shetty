@@ -26,7 +26,7 @@
                                 alt="plus-icon">
                             </button>
                         </div>
-                        <div id="product-{{ product.id }}" class="tisso-product-data" hidden data-product-json='{{ product.variants | json }}'>
+                        <div id="product-{{ product.id }}" class="tisso-product-data" hidden data-product-json='{{ product | json }}'>
                             <div class="product-info">
                                 <div class="product-img-wrapper">
                                     <img src="{{ product.featured_image | image_url: width:500 }}" 
@@ -49,10 +49,7 @@
                             <!-- Product Options -->
 
                             <div class="product-options">
-                                <input 
-                                type="hidden" 
-                                class="selected-variant-id"
-                                >
+
                                 {% for option in product.options_with_values %}
                                     {% if option.name == 'Color' %}
 
@@ -122,19 +119,56 @@
 
                             </div>
 
-                            <button 
-                            type="button"
-                            class="view-product add-to-cart-btn">
+                            <a href="{{ product.url }}" class="view-product">
                             ADD TO CART
                             <span>→</span>
-                            </button>
+                            </a>
 
                         </div>
                     </div>
 
                     <!-- Hidden Product Data -->
 
-                    
+                    <div 
+                        class="tisso-product-data"
+                        id="product-{{ product.id }}"
+                        hidden
+                    >
+
+                        <div class="product-image">
+                        <img
+                            src="{{ product.featured_image | image_url: width:500 }}"
+                            width="500"
+                            height="500"
+                            alt="{{ product.title }}"
+                        >
+                        </div>
+
+
+                        <h3>
+                        {{ product.title }}
+                        </h3>
+
+
+                        <div class="price">
+                        {{ product.price | money }}
+                        </div>
+
+
+                        <div class="description">
+                        {{ product.description | strip_html | truncate: 150 }}
+                        </div>
+
+
+                        <a 
+                        href="{{ product.url }}"
+                        class="view-product"
+                        >
+                        View Product
+                        </a>
+
+
+                    </div>
                 {% endfor %}
             {% endif %}
         </div>
@@ -498,32 +532,18 @@ document.addEventListener("click", function(event){
 
     if(button){
 
-        const productId = button.dataset.productId;
-
+        const productId = button.getAttribute("data-product-id");
         const productData = document.getElementById(productId);
 
         if(productData){
 
-            const popup = document.querySelector(".tisso-popup-content");
+            document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
 
-
-            popup.innerHTML = productData.innerHTML;
-
-
-            // copy variant json
-            popup.dataset.productJson =
-            productData.dataset.productJson;
-
-
-            document.querySelector(".tisso-modal")
-            .classList.add("active");
-
+            document.querySelector(".tisso-modal").classList.add("active");
 
         }
 
     }
-
-
 
 
     // Close popup
@@ -541,19 +561,14 @@ document.addEventListener("click", function(event){
 
     if(color){
 
-        document.querySelectorAll(".color-item")
+        color.parentElement.querySelectorAll(".color-item")
         .forEach(item=>{
             item.classList.remove("active");
         });
 
-
         color.classList.add("active");
 
-
-        updateVariant();
-
     }
-
 
 
 
@@ -577,6 +592,13 @@ document.addEventListener("click", function(event){
 
         const dropdown = sizeOption.closest(".custom-size-dropdown");
 
+        const selectedText = dropdown.querySelector(
+            ".size-dropdown-selected span:first-child"
+        );
+
+
+        selectedText.textContent = sizeOption.textContent;
+
 
         dropdown.querySelectorAll(".size-option")
         .forEach(option=>{
@@ -587,16 +609,10 @@ document.addEventListener("click", function(event){
         sizeOption.classList.add("selected");
 
 
-        dropdown.querySelector(".size-dropdown-selected span")
-        .textContent = sizeOption.textContent;
-
-
         dropdown.classList.remove("active");
 
-
-        updateVariant();
-
     }
+
 
 
     // Close dropdown when clicking outside
@@ -610,71 +626,6 @@ document.addEventListener("click", function(event){
         }
 
     });
-
-    function updateVariant(){
-
-    const popup = document.querySelector(".tisso-popup-content");
-
-
-    const productData = popup.closest(".tisso-product-data");
-
-
-    if(!productData) return;
-
-
-    const variants = JSON.parse(
-        productData.dataset.productJson
-    );
-
-
-    let selectedColor = "";
-
-    let selectedSize = "";
-
-
-
-    const color = popup.querySelector(".color-item.active");
-
-    if(color){
-        selectedColor = color.dataset.color;
-    }
-
-
-
-    const size = popup.querySelector(".size-option.selected");
-
-    if(size){
-        selectedSize = size.dataset.value;
-    }
-
-
-
-    const variant = variants.find(item=>{
-
-
-        return item.options.includes(selectedColor)
-        &&
-        item.options.includes(selectedSize);
-
-
-    });
-
-
-
-    if(variant){
-
-        popup.querySelector(".selected-variant-id").value =
-        variant.id;
-
-
-        console.log("Selected Variant:",variant.id);
-
-    }
-    console.log(productId, productData);
-
-}
-
-
 
 
 });
