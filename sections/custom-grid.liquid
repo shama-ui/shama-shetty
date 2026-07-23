@@ -83,12 +83,14 @@
 
                                         <div class="size-dropdown-selected">
                                             <span>Choose your size</span>
-                                            <img
-                                                src="{{ 'dropdown-arrow.svg' | asset_url }}"
-                                                alt="arrow"
-                                                width="12"
-                                                height="6"
-                                            >
+                                            <div class="size-arrow">
+                                                <img
+                                                    src="{{ 'dropdown-arrow.svg' | asset_url }}"
+                                                    alt="arrow"
+                                                    width="100%"
+                                                    height="100%"
+                                                >
+                                            </div>
                                             {% comment %} <span class="size-arrow"></span> {% endcomment %}
                                         </div>
 
@@ -350,13 +352,14 @@
 
 
 .size-arrow {
-    width: 8px;
-    height: 8px;
-    border-right: 1px solid #333;
+    width: 12px;
+    height: 6px;
+    transition: .3s ease;
+    {% comment %} border-right: 1px solid #333;
     border-bottom: 1px solid #333;
     transform: rotate(45deg);
-    transition: .3s ease;
-    margin-top: -5px;
+    
+    margin-top: -5px; {% endcomment %}
 }
 
 
