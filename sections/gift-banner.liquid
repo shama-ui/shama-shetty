@@ -282,11 +282,12 @@
   }
 
   .mobile-menu{
-    display:none;
+    {% comment %} display:none; {% endcomment %}
     background: #F2F2F2;
     padding:25px;
     text-align: center;
-    transition: transform 0.3s ease, display 0.3s ease;
+    height:0;
+    transition: transform 0.3s ease, height 0.3s ease;
   }
 
   .mobile-menu p{
@@ -298,7 +299,8 @@
 
   .mobile-menu.active{
     transform: scale(1);
-    display: block;
+    height:300px;
+    {% comment %} display: block; {% endcomment %}
     position:absolute;
     width:100%;
     
