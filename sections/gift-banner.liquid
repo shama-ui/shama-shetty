@@ -1,6 +1,5 @@
 <section class="gift-banner">
 
-  <!-- First Row: Content -->
   <div class="gift-banner__intro page-width">
     <div class="hamburger-image">
         <button class="hamburger-toggle" type="button" aria-label="Toggle menu">
@@ -45,8 +44,6 @@
   >
   </div>
 
-
-  <!-- Third Row: Two Column -->
   <div class="gift-banner__two-column page-width">
 
     <div class="gift-banner__content">
@@ -90,8 +87,6 @@
 
   </div>
 
-
-  <!-- Last Row Center Text -->
   <div class="gift-banner__footer-text">
     {{ section.settings.footer_text }}
   </div>
@@ -112,13 +107,9 @@
 
 
 .page-width{
-  {% comment %} max-width:1200px; {% endcomment %}
   margin:0 auto;
   padding:0 0 0 40px;
 }
-
-
-/* First Section */
 
 .gift-banner__intro{
   text-align:left;
@@ -188,15 +179,11 @@
 }
 
 
-/* Full Image */
-
 .gift-banner__full-image img{
   width:100%;
   display:block;
 }
 
-
-/* Two Column */
 
 .gift-banner__two-column{
   display:grid;
@@ -413,6 +400,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 
+  /* Hamburger and close icon toggle */
   const hamburger = document.querySelector(".hamburger-toggle");
   const icon = document.querySelector(".menu-icon");
   const menu = document.querySelector(".mobile-menu");
