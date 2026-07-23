@@ -525,6 +525,291 @@ document.addEventListener("click", function(event){
 
     }
 
+    const plus = event.target.closest(".tisso-plus");
+
+
+if(plus){
+
+    const productId = plus.dataset.productId;
+
+    const json = document.getElementById(
+        `product-data-${productId}`
+    );
+
+
+    const product = JSON.parse(json.textContent);
+
+
+    let html = `
+
+    <div class="product-info">
+
+        <div class="product-img-wrapper">
+            <img src="${product.image}">
+        </div>
+
+
+        <div class="product-description">
+
+            <h3>${product.title}</h3>
+
+            <div class="price">
+                ${product.price}
+            </div>
+
+
+            <div class="description">
+                ${product.description}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="product-options">
+    `;
+
+
+
+    /*
+       CREATE VARIANTS DYNAMICALLY
+    */
+
+
+    product.options.forEach(option=>{
+
+
+        html += `
+
+        <div class="option-title">
+            ${option.name}
+        </div>
+
+        <div class="variant-options"
+             data-option="${option.name}">
+        `;
+
+
+        option.values.forEach(value=>{
+
+            html += `
+
+            <button 
+            class="variant-button"
+            data-value="${value}">
+                ${value}
+            </button>
+
+            `;
+
+        });
+
+
+        html += `
+        </div>
+        `;
+
+
+    });
+
+
+
+    html += `
+
+
+    <button 
+    class="add-cart-btn"
+    data-product='${JSON.stringify(product)}'>
+        ADD TO CART →
+    </button>
+
+
+    `;
+
+
+    html += `</div>`;
+
+
+    document.querySelector(
+        ".tisso-popup-content"
+    ).innerHTML = html;
+
+
+
+    document.querySelector(
+        ".tisso-modal"
+    ).classList.add("active");
+
+
+}
+
+
+
+
+
+
+/* CLOSE POPUP */
+
+
+if(event.target.closest(".tisso-close")){
+
+document.querySelector(".tisso-modal")
+.classList.remove("active");
+
+}
+
+
+
+
+
+
+/* VARIANT SELECT */
+
+const variantBtn =
+event.target.closest(".variant-button");
+
+
+if(variantBtn){
+
+
+const parent =
+variantBtn.closest(".variant-options");
+
+
+parent.querySelectorAll(".variant-button")
+.forEach(btn=>{
+btn.classList.remove("active");
+});
+
+
+variantBtn.classList.add("active");
+
+
+}
+
+
+
+
+
+
+
+/* ADD TO CART */
+
+
+const addBtn =
+event.target.closest(".add-cart-btn");
+
+
+
+if(addBtn){
+
+
+const product =
+JSON.parse(addBtn.dataset.product);
+
+
+
+let selectedOptions=[];
+
+
+
+document.querySelectorAll(
+".variant-options"
+)
+.forEach(group=>{
+
+
+const selected =
+group.querySelector(".active");
+
+
+if(selected){
+
+selectedOptions.push(
+selected.dataset.value
+);
+
+}
+
+
+});
+
+
+
+
+const variant =
+product.variants.find(v=>{
+
+
+return JSON.stringify(
+v.options
+)
+===
+JSON.stringify(
+selectedOptions
+);
+
+
+});
+
+
+
+if(!variant){
+
+alert("Please select all options");
+
+return;
+
+}
+
+
+
+
+fetch('/cart/add.js',{
+
+method:'POST',
+
+headers:{
+'Content-Type':'application/json'
+},
+
+body:JSON.stringify({
+
+items:[
+{
+id:variant.id,
+quantity:1
+}
+]
+
+})
+
+})
+
+.then(response=>response.json())
+
+.then(data=>{
+
+
+alert("Product added to cart");
+
+
+document.querySelector(
+".tisso-modal"
+)
+.classList.remove("active");
+
+
+});
+
+
+}
+
+
+
+});
+
 
 
     // Close dropdown when clicking outside
