@@ -542,7 +542,11 @@ document.addEventListener("click", function(event){
 
         if(productData){
 
-            document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
+            const popup = document.querySelector(".tisso-popup-content");
+
+            popup.innerHTML = productData.innerHTML;
+
+            popup.dataset.productJson = productData.dataset.productJson;
 
             const productJSON = productData.dataset.productJson;
 
