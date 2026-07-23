@@ -587,8 +587,10 @@ document.addEventListener("click", function(event){
 
         sizeOption.classList.add("selected");
 
-
         dropdown.classList.remove("active");
+
+
+        updateVariant(dropdown.closest(".tisso-product-data"));
 
     }
 
