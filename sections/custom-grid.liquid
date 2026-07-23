@@ -49,7 +49,10 @@
                             <!-- Product Options -->
 
                             <div class="product-options">
-
+                                <input 
+                                    type="hidden" 
+                                    class="selected-variant-id"
+                                >
                                 {% for option in product.options_with_values %}
                                     {% if option.name == 'Color' %}
 
