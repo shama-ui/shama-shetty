@@ -119,10 +119,14 @@
 
                             </div>
 
-                            <a href="{{ product.url }}" class="view-product">
-                            ADD TO CART
-                            <span>→</span>
-                            </a>
+                            <button 
+                                class="view-product add-to-cart-btn"
+                                data-product-id="{{ product.id }}"
+                                data-variants='{{ product.variants | json }}'
+                            >
+                                ADD TO CART
+                                <span>→</span>
+                            </button>
 
                         </div>
                     </div>
