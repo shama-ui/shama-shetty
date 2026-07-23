@@ -21,6 +21,7 @@
 
         <a href="{{ section.settings.button_link }}" class="gift-banner__button">
         {{ section.settings.button_text }}
+        <span>→</span>
         </a>
     </div>
 
@@ -321,41 +322,38 @@
     left:16px
   }
 
-  .hamburger-toggle {
-    cursor: pointer;
-    display: inline-flex;
-  }
+  .hamburger-toggle{
+    border:none;
+    background:transparent;
+    padding:0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-  .menu-icon {
-    width: 28px;
-    height: 28px;
-    transition: transform .3s ease;
-  }
+.menu-icon{
+    width:24px;
+    height:24px;
+    display:block;
+    transition:all .3s ease;
+}
 
-    .mobile-dropdown {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height .4s ease, opacity .3s ease;
-    }
+.mobile-dropdown{
+    display:none;
+    margin-top:20px;
+}
 
-    .mobile-dropdown.open {
-    max-height: 300px;
-    opacity: 1;
-    margin-top: 20px;
-    }
+.mobile-dropdown.active{
+    display:block;
+}
 
-    .menu-icon.rotate {
-    transform: rotate(180deg);
-    }
-
-    .mobile-dropdown {
-    display: none;
-    }
-
-    .mobile-dropdown.open {
-    display: block;
-    }
+.gift-banner__button{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:16px;
+}
 
   .gift-banner__intro h1{
     font-size:36px;
