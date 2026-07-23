@@ -286,7 +286,8 @@
     background: #F2F2F2;
     padding:25px;
     text-align: center;
-    transition: transform 0.2s ease;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
   .mobile-menu p{
@@ -297,7 +298,8 @@
   }
 
   .mobile-menu.active{
-    display:block;
+    transform: scale(1);
+    opacity: 1;
     position:absolute;
     width:100%;
     
