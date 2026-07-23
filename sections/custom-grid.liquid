@@ -27,9 +27,9 @@
                             </button>
                         </div>
                         <div id="product-{{ product.id }}" class="tisso-product-data" hidden >
-                            <script type="application/json" class="product-variants">
+                            <div class="product-variants" hidden>
                             {{ product.variants | json }}
-                            </script>
+                            </div>
                             <div class="product-info">
                                 <div class="product-img-wrapper">
                                     <img src="{{ product.featured_image | image_url: width:500 }}" 
