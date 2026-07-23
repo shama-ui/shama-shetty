@@ -3,12 +3,17 @@
   <!-- First Row: Content -->
   <div class="gift-banner__intro page-width">
     <div class="hamburger-image">
-        <img
-        src="{{ 'hamburger-menu.svg' | asset_url }}"
-        alt="{{ section.settings.heading }}"
-        width=""
-        height=""
-        >
+        <button class="hamburger-toggle" type="button" aria-label="Toggle menu">
+            <img
+            class="menu-icon"
+            src="{{ 'hamburger-menu.svg' | asset_url }}"
+            data-menu="{{ 'hamburger-menu.svg' | asset_url }}"
+            data-close="{{ 'tisso-popup-close.svg' | asset_url }}"
+            alt="Menu"
+            width="18"
+            height="18"
+            >
+        </button>
     </div>
     
     <h1>{{ section.settings.heading }}</h1>
