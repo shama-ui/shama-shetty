@@ -2,17 +2,17 @@
 
   <!-- First Row: Content -->
   <div class="gift-banner__intro page-width">
-    <div class="hamburger-toggle">
-        <img
+    <button class="hamburger-toggle" type="button" aria-label="Toggle menu">
+      <img
         class="menu-icon"
         src="{{ 'hamburger-menu.svg' | asset_url }}"
         data-menu="{{ 'hamburger-menu.svg' | asset_url }}"
-        data-close="{{ 'tisso-popup-close.svg' | asset_url }}"
+        data-close="{{ 'close-icon.svg' | asset_url }}"
         alt="Menu"
         width="24"
         height="24"
-        >
-    </div>
+      >
+    </button>
         
     <h1>{{ section.settings.heading }}</h1>
 
