@@ -27,9 +27,6 @@
                             </button>
                         </div>
                         <div id="product-{{ product.id }}" class="tisso-product-data" hidden >
-                            <div class="product-variants" hidden>
-                            {{ product.variants | json }}
-                            </div>
                             <div class="product-info">
                                 <div class="product-img-wrapper">
                                     <img src="{{ product.featured_image | image_url: width:500 }}" 
@@ -121,16 +118,11 @@
 
 
                             </div>
-                            <input type="hidden" class="selected-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
 
-                            <button 
-                                type="button"
-                                class="view-product add-to-cart-btn"
-                                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                            >
-                                ADD TO CART
-                                <span>→</span>
-                            </button>
+                            <a href="{{ product.url }}" class="view-product">
+                            ADD TO CART
+                            <span>→</span>
+                            </a>
 
                         </div>
                     </div>
@@ -538,17 +530,12 @@ document.addEventListener("click", function(event){
 
     if(color){
 
-        const container = color.closest(".tisso-product-data");
-
         color.parentElement.querySelectorAll(".color-item")
         .forEach(item=>{
             item.classList.remove("active");
         });
 
         color.classList.add("active");
-
-
-        updateVariant(container);
 
     }
 
@@ -590,10 +577,8 @@ document.addEventListener("click", function(event){
 
         sizeOption.classList.add("selected");
 
+
         dropdown.classList.remove("active");
-
-
-        updateVariant(dropdown.closest(".tisso-product-data"));
 
     }
 
@@ -610,219 +595,6 @@ document.addEventListener("click", function(event){
         }
 
     });
-
-    function updateVariant(productBox){
-
-        if(!productBox) return;
-
-
-        const variants = JSON.parse(
-            productBox.querySelector(".add-to-cart-btn")
-            .dataset.variants
-        );
-
-
-        let selectedColor = "";
-        let selectedSize = "";
-
-
-        const color = productBox.querySelector(".color-item.active");
-
-        if(color){
-            selectedColor = color.dataset.color;
-        }
-
-
-        const size = productBox.querySelector(".size-option.selected");
-
-        if(size){
-            selectedSize = size.dataset.value;
-        }
-
-
-        const matchedVariant = variants.find(variant=>{
-
-            return variant.options.includes(selectedColor) &&
-                variant.options.includes(selectedSize);
-
-        });
-
-
-        if(matchedVariant){
-
-            productBox.querySelector(".selected-variant-id").value =
-            matchedVariant.id;
-
-        }
-
-    }
-
-    const addButton = event.target.closest(".add-to-cart-btn");
-
-
-    if(addButton){
-
-        const productBox = addButton.closest(".tisso-product-data");
-
-
-        const variantId = productBox.querySelector(
-            ".selected-variant-id"
-        ).value;
-
-
-        if(!variantId){
-
-            alert("Please select product options");
-
-            return;
-
-        }
-
-
-        fetch('/cart/add.js',{
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-
-                id:variantId,
-
-                quantity:1
-
-            })
-
-        })
-        .then(response=>response.json())
-
-        .then(data=>{
-
-            console.log("Added to cart",data);
-
-
-            // optional close popup
-            document.querySelector(".tisso-modal")
-            .classList.remove("active");
-
-
-            // update cart drawer/count if your theme has one
-            window.location.href="/cart";
-
-        })
-
-        .catch(error=>{
-
-            console.error("Cart Error:",error);
-
-        });
-
-
-    }
-
-
-    const addCartButton = event.target.closest(".add-to-cart-btn");
-
-
-    if(addCartButton){
-
-        <div class="tisso-popup-content"></div>
-
-
-        const variantData = productBox.querySelector(".product-variants");
-
-        if(!variantData){
-            console.log("Variant data missing");
-            return;
-        }
-
-        const variants = JSON.parse(
-            variantData.textContent
-        );
-
-
-        let selectedOptions = [];
-
-
-        // selected color
-        const selectedColor = productBox.querySelector(".color-item.active");
-
-        if(selectedColor){
-            selectedOptions.push(selectedColor.dataset.color);
-        }
-
-
-        // selected size
-        const selectedSize = productBox.querySelector(".size-option.selected");
-
-        if(selectedSize){
-            selectedOptions.push(selectedSize.dataset.value);
-        }
-
-
-
-        let selectedVariant = variants.find(variant=>{
-
-            return variant.options.every(option =>
-                selectedOptions.includes(option)
-            );
-
-        });
-
-
-
-        if(!selectedVariant){
-
-            alert("Please select color and size");
-
-            return;
-
-        }
-
-
-
-        fetch('/cart/add.js',{
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json",
-                "Accept":"application/json"
-            },
-
-            body:JSON.stringify({
-
-                id:selectedVariant.id,
-                quantity:1
-
-            })
-
-        })
-
-        .then(response=>response.json())
-
-        .then(data=>{
-
-            console.log("Added:",data);
-
-
-            document.querySelector(".tisso-modal")
-            .classList.remove("active");
-
-
-            window.location.href="/cart";
-
-        })
-
-        .catch(error=>{
-
-            console.log("Cart Error:",error);
-
-        });
-
-    }
 
 
 });
