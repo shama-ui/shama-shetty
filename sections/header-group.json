@@ -95,7 +95,7 @@
         "text_color_transparent_collection": ""
       }
     },
-    "gift_banner_LP847M": {
+    "gift_banner_49RX94": {
       "type": "gift-banner",
       "name": "Gift Banner",
       "settings": {
@@ -121,7 +121,7 @@
   },
   "order": [
     "header_section",
-    "gift_banner_LP847M",
+    "gift_banner_49RX94",
     "custom_grid_nQwBnX"
   ]
 }
