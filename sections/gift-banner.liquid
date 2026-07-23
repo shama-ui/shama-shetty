@@ -2,15 +2,18 @@
 
   <!-- First Row: Content -->
   <div class="gift-banner__intro page-width">
-    <div class="hamburger-image">
+    <div class="hamburger-toggle">
         <img
+        class="menu-icon"
         src="{{ 'hamburger-menu.svg' | asset_url }}"
-        alt="{{ section.settings.heading }}"
-        width=""
-        height=""
+        data-menu="{{ 'hamburger-menu.svg' | asset_url }}"
+        data-close="{{ 'close-icon.svg' | asset_url }}"
+        alt="Menu"
+        width="24"
+        height="24"
         >
     </div>
-    
+        
     <h1>{{ section.settings.heading }}</h1>
 
     <p>{{ section.settings.description }}</p>
@@ -309,6 +312,34 @@
     position:absolute;
     left:16px
   }
+
+  .hamburger-toggle {
+    cursor: pointer;
+    display: inline-flex;
+  }
+
+  .menu-icon {
+    width: 28px;
+    height: 28px;
+    transition: transform .3s ease;
+  }
+
+    .mobile-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height .4s ease, opacity .3s ease;
+    }
+
+    .mobile-dropdown.open {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 20px;
+    }
+
+    .menu-icon.rotate {
+    transform: rotate(180deg);
+    }
 
   .gift-banner__intro h1{
     font-size:36px;
