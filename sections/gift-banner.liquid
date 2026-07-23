@@ -412,6 +412,36 @@
 
 </style>
 
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const hamburger = document.querySelector(".hamburger-toggle");
+  const icon = document.querySelector(".menu-icon");
+  const menu = document.querySelector(".mobile-menu");
+
+  if(hamburger){
+
+    hamburger.addEventListener("click", function(){
+
+      menu.classList.toggle("active");
+
+      if(menu.classList.contains("active")){
+
+        icon.src = icon.dataset.close;
+
+      }else{
+
+        icon.src = icon.dataset.menu;
+
+      }
+
+    });
+
+  }
+
+});
+</script>
+
 
 {% schema %}
 {
