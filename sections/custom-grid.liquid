@@ -66,11 +66,12 @@
                                             {% for value in option.values %}
 
                                                 <button 
-                                                    class="color-item"
-                                                    data-color="{{ value }}"
-                                                    style="--color: {{ value | downcase }};"
+                                                class="color-item"
+                                                data-color="{{ value }}"
+                                                type="button"
+                                                style="--color: {{ value | downcase }};"
                                                 >
-                                                    {{ value }}
+                                                {{ value }}
                                                 </button>
 
                                             {% endfor %}
@@ -512,7 +513,12 @@ document.addEventListener("click", function(event){
 
         if(productData){
 
-            document.querySelector(".tisso-popup-content").innerHTML = productData.innerHTML;
+            document.querySelector(".tisso-popup-content").innerHTML = `
+            <div class="tisso-product-data" 
+            data-product='${productData.dataset.product}'>
+            ${productData.innerHTML}
+            </div>
+            `;
 
             document.querySelector(".tisso-modal").classList.add("active");
 
@@ -601,6 +607,140 @@ document.addEventListener("click", function(event){
         }
 
     });
+
+    const addButton = event.target.closest(".add-to-cart-btn");
+
+
+    if(addButton){
+
+        const popup = document.querySelector(".tisso-popup-content");
+
+
+        const productData = JSON.parse(
+            popup.querySelector(".tisso-product-data")?.dataset.product || "{}"
+        );
+
+
+        let selectedColor = "";
+        let selectedSize = "";
+
+
+        const color = popup.querySelector(".color-item.active");
+
+        if(color){
+            selectedColor = color.dataset.color;
+        }
+
+
+        const size = popup.querySelector(".size-option.selected");
+
+        if(size){
+            selectedSize = size.dataset.value;
+        }
+
+
+
+        let variantId = null;
+
+
+
+        productData.variants.forEach(function(variant){
+
+
+            let match = true;
+
+
+            productData.options.forEach(function(option,index){
+
+
+                if(option === "Color" && selectedColor){
+
+                    if(variant.options[index] !== selectedColor){
+                        match=false;
+                    }
+
+                }
+
+
+                if(option === "Size" && selectedSize){
+
+                    if(variant.options[index] !== selectedSize){
+                        match=false;
+                    }
+
+                }
+
+
+            });
+
+
+
+            if(match){
+                variantId = variant.id;
+            }
+
+
+        });
+
+
+
+        if(!variantId){
+
+            alert("Please select available options");
+            return;
+
+        }
+
+
+
+        fetch('/cart/add.js', {
+
+            method:'POST',
+
+            headers:{
+                'Content-Type':'application/json'
+            },
+
+            body:JSON.stringify({
+
+                items:[{
+
+                    id:variantId,
+
+                    quantity:1
+
+                }]
+
+            })
+
+        })
+
+        .then(response=>response.json())
+
+        .then(data=>{
+
+
+            console.log("Added:",data);
+
+
+            alert("Product added to cart");
+
+
+            document.querySelector(".tisso-modal")
+            .classList.remove("active");
+
+
+        })
+
+        .catch(error=>{
+
+            console.error(error);
+
+        });
+
+
+
+    }
 
 
 });
