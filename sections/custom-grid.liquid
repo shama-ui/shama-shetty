@@ -650,30 +650,65 @@ document.addEventListener("click", function(event){
 
     });
 
-    const sizeOption = event.target.closest(".size-option");
+    function updateVariant(){
 
-if(sizeOption){
-
-    const dropdown = sizeOption.closest(".custom-size-dropdown");
+    const popup = document.querySelector(".tisso-popup-content");
 
 
-    dropdown.querySelectorAll(".size-option")
-    .forEach(option=>{
-        option.classList.remove("selected");
+    const productData = popup.closest(".tisso-product-data");
+
+
+    if(!productData) return;
+
+
+    const variants = JSON.parse(
+        productData.dataset.productJson
+    );
+
+
+    let selectedColor = "";
+
+    let selectedSize = "";
+
+
+
+    const color = popup.querySelector(".color-item.active");
+
+    if(color){
+        selectedColor = color.dataset.color;
+    }
+
+
+
+    const size = popup.querySelector(".size-option.selected");
+
+    if(size){
+        selectedSize = size.dataset.value;
+    }
+
+
+
+    const variant = variants.find(item=>{
+
+
+        return item.options.includes(selectedColor)
+        &&
+        item.options.includes(selectedSize);
+
+
     });
 
 
-    sizeOption.classList.add("selected");
+
+    if(variant){
+
+        popup.querySelector(".selected-variant-id").value =
+        variant.id;
 
 
-    dropdown.querySelector(".size-dropdown-selected span")
-    .textContent = sizeOption.textContent;
+        console.log("Selected Variant:",variant.id);
 
-
-    dropdown.classList.remove("active");
-
-
-    updateVariant();
+    }
 
 }
 
