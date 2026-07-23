@@ -134,46 +134,7 @@
 
                     <!-- Hidden Product Data -->
 
-                    <div 
-                        class="tisso-product-data"
-                        id="product-{{ product.id }}"
-                        hidden
-                    >
-
-                        <div class="product-image">
-                        <img
-                            src="{{ product.featured_image | image_url: width:500 }}"
-                            width="500"
-                            height="500"
-                            alt="{{ product.title }}"
-                        >
-                        </div>
-
-
-                        <h3>
-                        {{ product.title }}
-                        </h3>
-
-
-                        <div class="price">
-                        {{ product.price | money }}
-                        </div>
-
-
-                        <div class="description">
-                        {{ product.description | strip_html | truncate: 150 }}
-                        </div>
-
-
-                        <a 
-                        href="{{ product.url }}"
-                        class="view-product"
-                        >
-                        View Product
-                        </a>
-
-
-                    </div>
+                    
                 {% endfor %}
             {% endif %}
         </div>
@@ -537,36 +498,32 @@ document.addEventListener("click", function(event){
 
     if(button){
 
-        const productId = button.getAttribute("data-product-id");
+        const productId = button.dataset.productId;
+
         const productData = document.getElementById(productId);
 
         if(productData){
 
             const popup = document.querySelector(".tisso-popup-content");
 
+
             popup.innerHTML = productData.innerHTML;
 
-            popup.dataset.productJson = productData.dataset.productJson;
 
-            const productJSON = productData.dataset.productJson;
-
-            document.querySelector(".tisso-popup-content")
-            .setAttribute("data-product-json", productJSON);
-
-
-            // Default variant
-            const product = JSON.parse(productJSON);
-
-            document.querySelector(".selected-variant-id").value =
-                product.variants[0].id;
+            // copy variant json
+            popup.dataset.productJson =
+            productData.dataset.productJson;
 
 
             document.querySelector(".tisso-modal")
             .classList.add("active");
 
+
         }
 
     }
+
+
 
 
     // Close popup
