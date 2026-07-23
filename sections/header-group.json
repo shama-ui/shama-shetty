@@ -110,7 +110,7 @@
         "footer_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
       }
     },
-    "custom_grid_g6Bjt6": {
+    "custom_grid_Q96yan": {
       "type": "custom-grid",
       "name": "Tisso Grid",
       "settings": {
@@ -122,6 +122,6 @@
   "order": [
     "header_section",
     "gift_banner_49RX94",
-    "custom_grid_g6Bjt6"
+    "custom_grid_Q96yan"
   ]
 }
